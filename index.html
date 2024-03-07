@@ -20,8 +20,8 @@
 
     <div id="buttons">
         <script type="module">
-            import { initializeApp } from "firebase/app";
-            import { getDatabase, ref, set } from "firebase/database";
+            import { initializeApp } from "/node_modules/firebase/app";
+            import { getDatabase, ref, set } from "/node_modules/firebase/database";
 
             // See: https://firebase.google.com/docs/web/learn-more#config-object
             const firebaseConfig = {
@@ -47,7 +47,7 @@
                 });
             }
         </script>
-        <button onclick="write2DB(1,'sampletext')">Submit!</button>
+        <button onclick="write2DB(1,'sampletext');">Submit!</button>
     </div>
 </body>
 </html>
