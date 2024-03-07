@@ -18,7 +18,7 @@
    <footer>Data Visualization</footer>
     </div>
 
-    <button id="button1">Submit!</button>
+    <button type="button" id="button1">Submit!</button>
     
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -51,7 +51,7 @@
             });
         }
 
-        document.querySelector("#button1").addEventListener('click', write2DB(1,'sampletext'));
+        document.querySelector("#button1").addEventListener('click', () => write2DB(1,'sampletext'));
     </script>
 </body>
 </html>
