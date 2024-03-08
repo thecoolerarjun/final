@@ -14,13 +14,19 @@
     <header>COLOR ASSN</header>
 
    <h1>Welcome to Color Assn</h1>
-
-   <footer>Data Visualization</footer>
+   <p>If you feel comfortable, please consider filling out the following pre-test questionnaire. If you are finished or do not wish to do so, then please click the "Skip" or "Submit" buttons to load the test and instructions.</p>
+   <p>The following test was created by Arjun Vyavaharkar. If you have any questions, feel free to send an email at the address, '<a href="mailto:apvyavaharkar@wpi.edu">apvyavaharkar@wpi.edu</a>.'</p>
     </div>
+
+    <fieldset> Please enter your name:
+        <input id="name"/>
+    </fieldset>
 
     <fieldset>
         <legend>What is your gender identity/sexual orientation? (select all that apply)</legend>
         <input type="checkbox" value="Prefer not to say" class="gender">Prefer not to say</input>
+        <br>
+        <input type="checkbox" value="Questioning" class="gender">Questioning</input>
         <br>
         <input type="checkbox" value="Male" class="gender">Male</input>
         <br>
@@ -197,6 +203,7 @@
         const database = getDatabase(app);
 
         function submit(userId) {
+            var name = document.getElementById("name").value;
             var gender = document.getElementsByClassName("gender");
             var race = document.getElementsByClassName("race");
             var religion = document.getElementsByClassName("religion");
@@ -246,6 +253,7 @@
 
             const db = getDatabase();
             set(ref(db, 'users/' + userId), {
+                name: name,
                 genders: userGender,
                 races: userRace,
                 religions: userReligion
