@@ -206,6 +206,9 @@
         // Initialize Realtime Database and get a reference to the service
         const database = getDatabase(app);
 
+        document.getElementById("canvas").style.display = "none";
+        document.getElementById("test").style.display = "none";
+
         // Button functions
         function skip(userId) {
             var name = "";
@@ -338,19 +341,19 @@
             health = 128;
             temperature = 128;
             localStorage.questionNumber++;
-            test.querySelector("displayNumber").text = "You are on color " + localStorage.questionNumber + " of 20.";
+            test.querySelector("#displayNumber").innerHTML = "You are on color " + localStorage.questionNumber + " of 20.";
             circle.attr('fill',d3.lab(Lstar,astar,bstar));
 
             if (questionNumber > 20) {
                 test.style.display = "none";
-                document.getElementById("finalMessage").text = "All done! Thank you for participating! You may now exit the window.";
+                document.getElementById("finalMessage").innerHTML = "All done! Thank you for participating! You may now exit the window.";
             }
         }
         
         test.querySelector("#next").addEventListener('click', () => next(localStorage.userId));
     </script>
 
-    <div id="test" style.display="none">
+    <div id="test">
         <p>Please use the sliders below to rate each color displayed based on how closely you believe it represents the concepts of beauty, health, and temperature.</p>
         <p>Keep in mind that this section is purely subjective, in that there are no right or wrong answers, and be sure to take as much time as you need.</p>
         <p>Once you are satisfied with your selection, click on "Next" in order to proceed to the next color. There are 20 in total.</p>
@@ -368,7 +371,7 @@
         <button id="next">Next</button>
     </div>
 
-    <div id="canvas" style.display="none" />
+    <div id="canvas" />
 
     <p id="finalMessage" />
 </body>
