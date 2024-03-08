@@ -328,11 +328,15 @@
             var index = localStorage.questionNumber;
 
             const db = getDatabase();
-            set(ref(db, 'users/' + userId + '/test/colors/'), {
-                index:(Lstar,astar,bstar)
+            set(ref(db, `users/${userId}/test/colors/${index}/`), {
+                Lstar:Lstar,
+                astar:astar,
+                bstar:bstar
             });
-            set(ref(db, 'users/' + userId + '/test/answers/'), {
-                index:(beauty,health,temperature)
+            set(ref(db, `users/${userId}/test/colors/${index}/`), {
+                beauty:beauty,
+                health:health,
+                temperature:temperature
             });
             
             Lstar = Math.random()*100;
@@ -345,7 +349,7 @@
             test.querySelector("#displayNumber").innerHTML = "You are on color " + localStorage.questionNumber + " of 20.";
             circle.attr('fill',d3.lab(Lstar,astar,bstar));
 
-            if (questionNumber > 20) {
+            if (localStorage.questionNumber > 20) {
                 test.style.display = "none";
                 document.getElementById("finalMessage").innerHTML = "All done! Thank you for participating! You may now exit the window.";
             }
@@ -363,11 +367,11 @@
         <p id="displayNumber">You are on color 1 of 20.</p>
 
         <br>
-        Ugly <input type="range" min="0" max="255" step="1" value="128" id="beauty" /> Pretty
+        Ugly   <input type="range" min="0" max="255" step="1" value="128" id="beauty" /> Pretty
         <br>
         Sickly <input type="range" min="0" max="255" step="1" value="128" id="health"/> Healthy
         <br>
-        Cool <input type="range" min="0" max="255" step="1" value="128" id="temperature"/> Warm
+        Cool   <input type="range" min="0" max="255" step="1" value="128" id="temperature"/> Warm
         <br>
         <button id="next">Next</button>
     </div>
