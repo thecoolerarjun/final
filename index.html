@@ -290,23 +290,24 @@
         questionnaire.querySelector("#submit").addEventListener('click', () => submit(Date.now()));
         questionnaire.querySelector("#skip").addEventListener('click', () => skip(Date.now()));
 
-        // import d3 from "https://d3js.org/d3.v7.min.js";
+        // D3.js code block
+        import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-        // var Lstar = Math.random()*100;
-        // var astar = Math.random()*320-160;
-        // var bstar = Math.random()*320-160;
+        var Lstar = Math.random()*100;
+        var astar = Math.random()*320-160;
+        var bstar = Math.random()*320-160;
 
-        // var svg = d3.select('#canvas')
-        //     .append('svg')
-        //         .attr('width',200)
-        //         .attr('height',200);
+        var svg = d3.select('#canvas')
+            .append('svg')
+                .attr('width',200)
+                .attr('height',200);
 
-        // var circle = svg.append('circle')
-        //     .attr('cx',100)
-        //     .attr('cy',100)
-        //     .attr('r',50)
-        //     .attr('fill',d3.lab(Lstar,astar,bstar))
-        //     .attr('stroke','black');
+        var circle = svg.append('circle')
+            .attr('cx',100)
+            .attr('cy',100)
+            .attr('r',50)
+            .attr('fill',d3.lab(Lstar,astar,bstar))
+            .attr('stroke','black');
     </script>
 
     <div id="canvas" />
