@@ -14,10 +14,11 @@
     <header>COLOR ASSOCIATION TEST</header>
 
    <h1>Welcome to Color Association Test</h1>
-   <p>If you feel comfortable, please consider filling out the following pre-test questionnaire. If you are finished or do not wish to do so, then please click the "Skip" or "Submit" buttons to load the test and instructions.</p>
-   <p>The following test was created by Arjun Vyavaharkar. If you have any questions, feel free to send an email at the address, '<a href="mailto:apvyavaharkar@wpi.edu">apvyavaharkar@wpi.edu</a>.'</p>
     </div>
     <div id="questionnaire">
+        <p>If you feel comfortable, please consider filling out the following pre-test questionnaire. If you are finished or do not wish to do so, then please click the "Skip" or "Submit" buttons to load the test and instructions.</p>
+        <p>The following test was created by Arjun Vyavaharkar. If you have any questions, feel free to send an email at the address, '<a href="mailto:apvyavaharkar@wpi.edu">apvyavaharkar@wpi.edu</a>.'</p>
+        
         <button type="button" id="skip">Skip</button>
         <br>
         <fieldset>
@@ -222,6 +223,9 @@
 
             localStorage.userId = userId;
             document.getElementById("questionnaire").style.display = "none";
+            document.getElementById("canvas").style.display = "block";
+            document.getElementById("test").style.display = "block";
+            localStorage.questionNumber = 1;
         }
 
         function submit(userId) {
@@ -283,6 +287,9 @@
 
             localStorage.userId = userId;
             document.getElementById("questionnaire").style.display = "none";
+            document.getElementById("canvas").style.display = "block";
+            document.getElementById("test").style.display = "block";
+            localStorage.questionNumber = 1;
         }
 
         var questionnaire = document.getElementById("questionnaire");
@@ -308,8 +315,61 @@
             .attr('r',50)
             .attr('fill',d3.lab(Lstar,astar,bstar))
             .attr('stroke','black');
+
+        var test = document.getElementById("test");
+        
+        function next(userId) {
+            var beauty = test.getElementById("beauty").value;
+            var health = test.getElementById("health").value;
+            var temperature = test.getElementById("temperature").value;
+
+            const db = getDatabase();
+            set(ref(db, 'users/' + userId + '/test/colors/'),
+                (Lstar,astar,bstar)
+            );
+            set(ref(db, 'users/' + userId + '/test/answers/'),
+                (beauty,health,temperature)
+            );
+            
+            Lstar = Math.random()*100;
+            astar = Math.random()*320-160;
+            bstar = Math.random()*320-160;
+            beauty = 128;
+            health = 128;
+            temperature = 128;
+            localStorage.questionNumber++;
+            test.getElementById("displayNumber").text = "You are on color " + localStorage.questionNumber + " of 20.";
+            circle.attr('fill',d3.lab(Lstar,astar,bstar));
+
+            if (questionNumber > 20) {
+                test.style.display = "none";
+                document.getElementById("finalMessage").text = "All done! Thank you for participating! You may now exit the window.";
+            }
+        }
+        
+        test.querySelector("#next").addEventListener('click', () => next(localStorage.userId));
     </script>
 
-    <div id="canvas" />
+    <div id="test" style.display="none">
+        <p>Please use the sliders below to rate each color displayed based on how closely you believe it represents the concepts of beauty, health, and temperature.</p>
+        <p>Keep in mind that this section is purely subjective, in that there are no right or wrong answers, and be sure to take as much time as you need.</p>
+        <p>Once you are satisfied with your selection, click on "Next" in order to proceed to the next color. There are 20 in total.</p>
+        <p>Note: Upon clicking "Next," you will immediately be prompted to rate the next color. You cannot go back to the previous.</p>
+        <p>If you have any questions, do not hesitate to send an email to the address, '<a href="mailto:apvyavaharkar@wpi.edu"></a>.'</p>
+        <p id="displayNumber">You are on color 1 of 20.</p>
+
+        <br>
+        Ugly <input type="range" min="0" max="255" step="1" value="128" id="beauty" /> Pretty
+        <br>
+        Sickly <input type="range" min="0" max="255" step="1" value="128" id="health"/> Healthy
+        <br>
+        Cool <input type="range" min="0" max="255" step="1" value="128" id="temperature"/> Warm
+        <br>
+        <button id="next">Next</button>
+    </div>
+
+    <div id="canvas" style.display="none" />
+
+    <p id="finalMessage" />
 </body>
 </html>
