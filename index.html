@@ -219,8 +219,8 @@
             });
 
             localStorage.userId = userId;
-            document.getElementById("submit").visibility = "hidden";
-            document.getElementById("skip").visibility = "hidden";
+            document.getElementById("submit").style.visibility = "hidden";
+            document.getElementById("skip").style.visibility = "hidden";
         }
 
         function submit(userId) {
@@ -281,8 +281,8 @@
             });
 
             localStorage.userId = userId;
-            document.getElementById("submit").visibility = "hidden";
-            document.getElementById("skip").visibility = "hidden";
+            document.getElementById("submit").style.visibility = "hidden";
+            document.getElementById("skip").style.visibility = "hidden";
         }
 
         document.querySelector("#submit").addEventListener('click', () => submit(Date.now()));
