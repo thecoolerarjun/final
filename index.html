@@ -338,9 +338,9 @@
             Lstar = Math.random()*100;
             astar = Math.random()*320-160;
             bstar = Math.random()*320-160;
-            beauty = 128;
-            health = 128;
-            temperature = 128;
+            test.querySelector("#beauty").value = 128;
+            test.querySelector("#health").value = 128;
+            test.querySelector("#temperature").value = 128;
             localStorage.questionNumber++;
             test.querySelector("#displayNumber").innerHTML = "You are on color " + localStorage.questionNumber + " of 20.";
             circle.attr('fill',d3.lab(Lstar,astar,bstar));
