@@ -365,19 +365,21 @@
         <p>Once you are satisfied with your selection, click on "Next" in order to proceed to the next color. There are 20 in total.</p>
         <p>Note: Upon clicking "Next," you will immediately be prompted to rate the next color. You cannot go back to the previous.</p>
         <p>If you have any questions, do not hesitate to send an email to the address, '<a href="mailto:apvyavaharkar@wpi.edu"></a>.'</p>
-        <p id="displayNumber">You are on color 1 of 20.</p>
 
-        <br>
-        <label align="center">Ugly</label><input align="center" type="range" min="0" max="255" step="1" value="128" id="beauty" /><label>Pretty</label>
-        <br>
-        <label align="center">Sickly</label><input align="center" type="range" min="0" max="255" step="1" value="128" id="health"/><label>Healthy</label>
-        <br>
-        <label align="center">Cool</label><input align="center" type="range" min="0" max="255" step="1" value="128" id="temperature"/><label>Warm</label>
-        <br>
-        <button id="next">Next</button>
+        <div>
+            <p id="displayNumber">You are on color 1 of 20.</p>
+            <br>
+            <label>Ugly</label><input type="range" min="0" max="255" step="1" value="128" id="beauty" /><label>Pretty</label>
+            <br>
+            <label>Sickly</label><input type="range" min="0" max="255" step="1" value="128" id="health"/><label>Healthy</label>
+            <br>
+            <label>Cool</label><input type="range" min="0" max="255" step="1" value="128" id="temperature"/><label>Warm</label>
+            <br>
+            <button id="next">Next</button>
+        </div>
     </div>
 
-    <div id="canvas" align="center" />
+    <div id="canvas" />
 
     <p id="finalMessage" />
 </body>
