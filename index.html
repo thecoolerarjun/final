@@ -287,8 +287,8 @@
             document.getElementById("questionnaire").style.visibility = "hidden";
         }
 
-        document.querySelector("#submit").addEventListener('click', () => submit(Date.now()));
-        document.querySelector("#skip").addEventListener('click', () => skip(Date.now()));
+        document.querySelector("#questionnaire#submit").addEventListener('click', () => submit(Date.now()));
+        document.querySelector("#questionnaire#skip").addEventListener('click', () => skip(Date.now()));
 
         import d3 from "https://d3js.org/d3.v7.min.js";
 
