@@ -285,8 +285,10 @@
             document.getElementById("questionnaire").style.display = "none";
         }
 
-        document.querySelector("#questionnaire#submit").addEventListener('click', () => submit(Date.now()));
-        document.querySelector("#questionnaire#skip").addEventListener('click', () => skip(Date.now()));
+        var questionnaire = document.getElementById("questionnaire");
+
+        questionnaire.querySelector("#submit").addEventListener('click', () => submit(Date.now()));
+        questionnaire.querySelector("#skip").addEventListener('click', () => skip(Date.now()));
 
         // import d3 from "https://d3js.org/d3.v7.min.js";
 
