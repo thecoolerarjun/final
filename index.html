@@ -18,23 +18,24 @@
    <footer>Data Visualization</footer>
     </div>
 
-    <form id="religion">
-        <input type="checkbox" value="Unaffiliated">Unaffiliated</input>
-        <input type="checkbox" value="Atheism">Atheism</input>
-        <input type="checkbox" value="Agnosticism">Agnosticism</input>
-        <input type="checkbox" value="Christianity">Christianity</input>
-        <input type="checkbox" value="Islam">Islam</input>
-        <input type="checkbox" value="Judaism">Judaism</input>
-        <input type="checkbox" value="Hinduism">Hinduism</input>
-        <input type="checkbox" value="Buddhism">Buddhism</input>
-        <input type="checkbox" value="Sikhism">Sikhism</input>
-        <input type="checkbox" value="Confucianism">Confucianism</input>
-        <input type="checkbox" value="Taoism">Taoism</input>
-        <input type="checkbox" value="Chinese">Chinese Folk Religion</input>
-        <input type="checkbox">Other (not listed): <input id="other" /></input>
-    </form>
+    <fieldset>
+        <legend>What is your religious identity? (select all that apply)</legend>
+        <input type="checkbox" value="Unaffiliated" class="religion">Unaffiliated</input>
+        <input type="checkbox" value="Atheism" class="religion">Atheism</input>
+        <input type="checkbox" value="Agnosticism" class="religion">Agnosticism</input>
+        <input type="checkbox" value="Christianity" class="religion">Christianity</input>
+        <input type="checkbox" value="Islam" class="religion">Islam</input>
+        <input type="checkbox" value="Judaism" class="religion">Judaism</input>
+        <input type="checkbox" value="Hinduism" class="religion">Hinduism</input>
+        <input type="checkbox" value="Buddhism" class="religion">Buddhism</input>
+        <input type="checkbox" value="Sikhism" class="religion">Sikhism</input>
+        <input type="checkbox" value="Confucianism" class="religion">Confucianism</input>
+        <input type="checkbox" value="Taoism" class="religion">Taoism</input>
+        <input type="checkbox" value="Chinese" class="religion">Chinese Folk Religion</input>
+        <input type="checkbox" class="religion">Other (not listed): <input id="other" /></input>
+    </fieldset>
 
-    <button type="button" id="button1">Submit!</button>
+    <button type="button" id="submit">Submit</button>
 
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -61,13 +62,25 @@
         const database = getDatabase(app);
 
         function write2DB(userId, text) {
+            var religion = document.getElementsByClassName("religion");
+            var userReligion = [];
+            for (var i = 0; i < religion.length; i++) {
+                if (religion[i].checked) {
+                    if (i == religion.length - 1) {
+                        userReligion.push(document.getElementById("other").value);
+                    } else {
+                        userReligion.push(religion[i].value);
+                    }
+                }
+            }
+
             const db = getDatabase();
             set(ref(db, 'users/' + userId), {
-                text: text
+                religions: userReligion
             });
         }
 
-        document.querySelector("#button1").addEventListener('click', () => write2DB(1,'sampletext'));
+        document.querySelector("#submit").addEventListener('click', () => write2DB(1,'sampletext'));
     </script>
 </body>
 </html>
