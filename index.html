@@ -17,169 +17,172 @@
    <p>If you feel comfortable, please consider filling out the following pre-test questionnaire. If you are finished or do not wish to do so, then please click the "Skip" or "Submit" buttons to load the test and instructions.</p>
    <p>The following test was created by Arjun Vyavaharkar. If you have any questions, feel free to send an email at the address, '<a href="mailto:apvyavaharkar@wpi.edu">apvyavaharkar@wpi.edu</a>.'</p>
     </div>
+    <div id="questionnaire">
+        <button type="button" id="skip">Skip</button>
+        <br>
+        <fieldset>
+            <legend>Please enter your first and last initials:</legend>
+            <input id="name"/>
+        </fieldset>
 
-    <button type="button" id="skip">Skip</button>
-    <br>
-    <fieldset>
-        <legend>Please enter your first and last initials:</legend>
-        <input id="name"/>
-    </fieldset>
+        <fieldset>
+            <legend>What is your gender identity/sexual orientation? (select all that apply)</legend>
+            <input type="checkbox" value="Prefer not to say" class="gender">Prefer not to say</input>
+            <br>
+            <input type="checkbox" value="Questioning" class="gender">Questioning</input>
+            <br>
+            <input type="checkbox" value="Male" class="gender">Male</input>
+            <br>
+            <input type="checkbox" value="Masculine" class="gender">Masculine</input>
+            <br>
+            <input type="checkbox" value="Female" class="gender">Female</input>
+            <br>
+            <input type="checkbox" value="Feminine" class="gender">Feminine</input>
+            <br>
+            <input type="checkbox" value="Cisgender" class="gender">Cisgender</input>
+            <br>
+            <input type="checkbox" value="Transgender" class="gender">Transgender</input>
+            <br>
+            <input type="checkbox" value="Nonbinary" class="gender">Nonbinary</input>
+            <br>
+            <input type="checkbox" value="Bigender" class="gender">Bigender</input>
+            <br>
+            <input type="checkbox" value="Multigender" class="gender">Multigender</input>
+            <br>
+            <input type="checkbox" value="Pangender" class="gender">Pangender</input>
+            <br>
+            <input type="checkbox" value="Agender" class="gender">Agender</input>
+            <br>
+            <input type="checkbox" value="Genderfluid" class="gender">Genderfluid</input>
+            <br>
+            <input type="checkbox" value="Genderqueer" class="gender">Genderqueer</input>
+            <br>
+            <input type="checkbox" value="Two-Spirit" class="gender">Two-Spirit</input>
+            <br>
+            <input type="checkbox" value="Heterosexual" class="gender">Heterosexual</input>
+            <br>
+            <input type="checkbox" value="Homosexual" class="gender">Homosexual</input>
+            <br>
+            <input type="checkbox" value="Bisexual" class="gender">Bisexual</input>
+            <br>
+            <input type="checkbox" value="Multisexual" class="gender">Multisexual</input>
+            <br>
+            <input type="checkbox" value="Pansexual" class="gender">Pansexual</input>
+            <br>
+            <input type="checkbox" value="Asexual" class="gender">Asexual</input>
+            <br>
+            <input type="checkbox" value="Aromantic" class="gender">Aromantic</input>
+            <br>
+            <input type="checkbox" value="Polyamorous" class="gender">Polyamorous</input>
+            <br>
+            <input type="checkbox" value="Queer" class="gender">Queer</input>
+            <br>
+            <input type="checkbox" value="Intersex" class="gender">Intersex</input>
+            <br>
+            <input type="checkbox" class="gender">Other (not listed): <input id="otherGender" /></input>
+            <br>
+        </fieldset>
 
-    <fieldset>
-        <legend>What is your gender identity/sexual orientation? (select all that apply)</legend>
-        <input type="checkbox" value="Prefer not to say" class="gender">Prefer not to say</input>
-        <br>
-        <input type="checkbox" value="Questioning" class="gender">Questioning</input>
-        <br>
-        <input type="checkbox" value="Male" class="gender">Male</input>
-        <br>
-        <input type="checkbox" value="Masculine" class="gender">Masculine</input>
-        <br>
-        <input type="checkbox" value="Female" class="gender">Female</input>
-        <br>
-        <input type="checkbox" value="Feminine" class="gender">Feminine</input>
-        <br>
-        <input type="checkbox" value="Cisgender" class="gender">Cisgender</input>
-        <br>
-        <input type="checkbox" value="Transgender" class="gender">Transgender</input>
-        <br>
-        <input type="checkbox" value="Nonbinary" class="gender">Nonbinary</input>
-        <br>
-        <input type="checkbox" value="Bigender" class="gender">Bigender</input>
-        <br>
-        <input type="checkbox" value="Multigender" class="gender">Multigender</input>
-        <br>
-        <input type="checkbox" value="Pangender" class="gender">Pangender</input>
-        <br>
-        <input type="checkbox" value="Agender" class="gender">Agender</input>
-        <br>
-        <input type="checkbox" value="Genderfluid" class="gender">Genderfluid</input>
-        <br>
-        <input type="checkbox" value="Genderqueer" class="gender">Genderqueer</input>
-        <br>
-        <input type="checkbox" value="Two-Spirit" class="gender">Two-Spirit</input>
-        <br>
-        <input type="checkbox" value="Heterosexual" class="gender">Heterosexual</input>
-        <br>
-        <input type="checkbox" value="Homosexual" class="gender">Homosexual</input>
-        <br>
-        <input type="checkbox" value="Bisexual" class="gender">Bisexual</input>
-        <br>
-        <input type="checkbox" value="Multisexual" class="gender">Multisexual</input>
-        <br>
-        <input type="checkbox" value="Pansexual" class="gender">Pansexual</input>
-        <br>
-        <input type="checkbox" value="Asexual" class="gender">Asexual</input>
-        <br>
-        <input type="checkbox" value="Aromantic" class="gender">Aromantic</input>
-        <br>
-        <input type="checkbox" value="Polyamorous" class="gender">Polyamorous</input>
-        <br>
-        <input type="checkbox" value="Queer" class="gender">Queer</input>
-        <br>
-        <input type="checkbox" value="Intersex" class="gender">Intersex</input>
-        <br>
-        <input type="checkbox" class="gender">Other (not listed): <input id="otherGender" /></input>
-        <br>
-    </fieldset>
+        <fieldset>
+            <legend>What is your racial/ethnic identity? (select all that apply)</legend>
+            <input type="checkbox" value="White" class="race">White</input>
+            <br>
+            <input type="checkbox" value="Caucasian" class="race">Caucasian</input>
+            <br>
+            <input type="checkbox" value="European" class="race">European</input>
+            <br>
+            <input type="checkbox" value="Eurasian" class="race">North African</input>
+            <br>
+            <input type="checkbox" value="Latin American" class="race">Latin American</input>
+            <br>
+            <input type="checkbox" value="Middle Eastern" class="race">Middle Eastern</input>
+            <br>
+            <input type="checkbox" value="North African" class="race">North African</input>
+            <br>
+            <input type="checkbox" value="Eurasian" class="race">North African</input>
+            <br>
+            <input type="checkbox" value="Central Asian" class="race">Central Asian</input>
+            <br>
+            <input type="checkbox" value="Black" class="race">Black</input>
+            <br>
+            <input type="checkbox" value="African American" class="race">African American</input>
+            <br>
+            <input type="checkbox" value="Afro-Caribbean" class="race">Afro-Caribbean</input>
+            <br>
+            <input type="checkbox" value="Black Hispanic" class="race">Black Hispanic</input>
+            <br>
+            <input type="checkbox" value="Sub-Saharan African" class="race">Sub-Saharan African</input>
+            <br>
+            <input type="checkbox" value="Indigenous Australian" class="race">Indigenous Australian</input>
+            <br>
+            <input type="checkbox" value="Melanesian" class="race">Melanesian</input>
+            <br>
+            <input type="checkbox" value="Andamanese" class="race">Andamanese</input>
+            <br>
+            <input type="checkbox" value="Malagasy" class="race">Malagasy</input>
+            <br>
+            <input type="checkbox" value="Asian" class="race">Asian</input>
+            <br>
+            <input type="checkbox" value="South Asian" class="race">South Asian</input>
+            <br>
+            <input type="checkbox" value="East Asian" class="race">East Asian</input>
+            <br>
+            <input type="checkbox" value="Southeast Asian" class="race">Southeast Asian</input>
+            <br>
+            <input type="checkbox" value="Pacific Islander" class="race">Pacific Islander</input>
+            <br>
+            <input type="checkbox" value="Indigenous American" class="race">Indigenous American</input>
+            <br>
+            <input type="checkbox" value="Native American" class="race">Native American</input>
+            <br>
+            <input type="checkbox" value="Inuit" class="race">Inuit</input>
+            <br>
+            <input type="checkbox" value="First Nations" class="race">First Nations</input>
+            <br>
+            <input type="checkbox" value="Mesoamerican" class="race">Mesoamerican</input>
+            <br>
+            <input type="checkbox" value="Multiracial" class="race">Multiracial</input>
+            <br>
+            <input type="checkbox" class="race">Other (not listed): <input id="otherRace" /></input>
+        </fieldset>
 
-    <fieldset>
-        <legend>What is your racial/ethnic identity? (select all that apply)</legend>
-        <input type="checkbox" value="White" class="race">White</input>
+        <fieldset>
+            <legend>What is your religious identity? (select all that apply)</legend>
+            <input type="checkbox" value="Unaffiliated" class="religion">Unaffiliated</input>
+            <br>
+            <input type="checkbox" value="Atheism" class="religion">Atheism</input>
+            <br>
+            <input type="checkbox" value="Agnosticism" class="religion">Agnosticism</input>
+            <br>
+            <input type="checkbox" value="Christianity" class="religion">Christianity</input>
+            <br>
+            <input type="checkbox" value="Islam" class="religion">Islam</input>
+            <br>
+            <input type="checkbox" value="Judaism" class="religion">Judaism</input>
+            <br>
+            <input type="checkbox" value="Paganism" class="religion">Paganism</input>
+            <br>
+            <input type="checkbox" value="Satanism" class="religion">Satanism</input>
+            <br>
+            <input type="checkbox" value="Hinduism" class="religion">Hinduism</input>
+            <br>
+            <input type="checkbox" value="Buddhism" class="religion">Buddhism</input>
+            <br>
+            <input type="checkbox" value="Sikhism" class="religion">Sikhism</input>
+            <br>
+            <input type="checkbox" value="Confucianism" class="religion">Confucianism</input>
+            <br>
+            <input type="checkbox" value="Taoism" class="religion">Taoism</input>
+            <br>
+            <input type="checkbox" value="Chinese Folk Religion" class="religion">Chinese Folk Religion</input>
+            <br>
+            <input type="checkbox" class="religion">Other (not listed): <input id="otherReligion" /></input>
+        </fieldset>
         <br>
-        <input type="checkbox" value="Caucasian" class="race">Caucasian</input>
-        <br>
-        <input type="checkbox" value="European" class="race">European</input>
-        <br>
-        <input type="checkbox" value="Eurasian" class="race">North African</input>
-        <br>
-        <input type="checkbox" value="Latin American" class="race">Latin American</input>
-        <br>
-        <input type="checkbox" value="Middle Eastern" class="race">Middle Eastern</input>
-        <br>
-        <input type="checkbox" value="North African" class="race">North African</input>
-        <br>
-        <input type="checkbox" value="Eurasian" class="race">North African</input>
-        <br>
-        <input type="checkbox" value="Central Asian" class="race">Central Asian</input>
-        <br>
-        <input type="checkbox" value="Black" class="race">Black</input>
-        <br>
-        <input type="checkbox" value="African American" class="race">African American</input>
-        <br>
-        <input type="checkbox" value="Afro-Caribbean" class="race">Afro-Caribbean</input>
-        <br>
-        <input type="checkbox" value="Black Hispanic" class="race">Black Hispanic</input>
-        <br>
-        <input type="checkbox" value="Sub-Saharan African" class="race">Sub-Saharan African</input>
-        <br>
-        <input type="checkbox" value="Indigenous Australian" class="race">Indigenous Australian</input>
-        <br>
-        <input type="checkbox" value="Melanesian" class="race">Melanesian</input>
-        <br>
-        <input type="checkbox" value="Andamanese" class="race">Andamanese</input>
-        <br>
-        <input type="checkbox" value="Malagasy" class="race">Malagasy</input>
-        <br>
-        <input type="checkbox" value="Asian" class="race">Asian</input>
-        <br>
-        <input type="checkbox" value="South Asian" class="race">South Asian</input>
-        <br>
-        <input type="checkbox" value="East Asian" class="race">East Asian</input>
-        <br>
-        <input type="checkbox" value="Southeast Asian" class="race">Southeast Asian</input>
-        <br>
-        <input type="checkbox" value="Pacific Islander" class="race">Pacific Islander</input>
-        <br>
-        <input type="checkbox" value="Indigenous American" class="race">Indigenous American</input>
-        <br>
-        <input type="checkbox" value="Native American" class="race">Native American</input>
-        <br>
-        <input type="checkbox" value="Inuit" class="race">Inuit</input>
-        <br>
-        <input type="checkbox" value="First Nations" class="race">First Nations</input>
-        <br>
-        <input type="checkbox" value="Mesoamerican" class="race">Mesoamerican</input>
-        <br>
-        <input type="checkbox" value="Multiracial" class="race">Multiracial</input>
-        <br>
-        <input type="checkbox" class="race">Other (not listed): <input id="otherRace" /></input>
-    </fieldset>
+        <button type="button" id="submit">Submit</button>
+    </div>
 
-    <fieldset>
-        <legend>What is your religious identity? (select all that apply)</legend>
-        <input type="checkbox" value="Unaffiliated" class="religion">Unaffiliated</input>
-        <br>
-        <input type="checkbox" value="Atheism" class="religion">Atheism</input>
-        <br>
-        <input type="checkbox" value="Agnosticism" class="religion">Agnosticism</input>
-        <br>
-        <input type="checkbox" value="Christianity" class="religion">Christianity</input>
-        <br>
-        <input type="checkbox" value="Islam" class="religion">Islam</input>
-        <br>
-        <input type="checkbox" value="Judaism" class="religion">Judaism</input>
-        <br>
-        <input type="checkbox" value="Paganism" class="religion">Paganism</input>
-        <br>
-        <input type="checkbox" value="Satanism" class="religion">Satanism</input>
-        <br>
-        <input type="checkbox" value="Hinduism" class="religion">Hinduism</input>
-        <br>
-        <input type="checkbox" value="Buddhism" class="religion">Buddhism</input>
-        <br>
-        <input type="checkbox" value="Sikhism" class="religion">Sikhism</input>
-        <br>
-        <input type="checkbox" value="Confucianism" class="religion">Confucianism</input>
-        <br>
-        <input type="checkbox" value="Taoism" class="religion">Taoism</input>
-        <br>
-        <input type="checkbox" value="Chinese Folk Religion" class="religion">Chinese Folk Religion</input>
-        <br>
-        <input type="checkbox" class="religion">Other (not listed): <input id="otherReligion" /></input>
-    </fieldset>
-    <br>
-    <button type="button" id="submit">Submit</button>
+    <div id="canvas" />
 
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -220,8 +223,7 @@
             });
 
             localStorage.userId = userId;
-            document.getElementById("submit").style.visibility = "hidden";
-            document.getElementById("skip").style.visibility = "hidden";
+            document.getElementById("questionnaire").style.visibility = "hidden";
         }
 
         function submit(userId) {
@@ -282,12 +284,29 @@
             });
 
             localStorage.userId = userId;
-            document.getElementById("submit").style.visibility = "hidden";
-            document.getElementById("skip").style.visibility = "hidden";
+            document.getElementById("questionnaire").style.visibility = "hidden";
         }
 
         document.querySelector("#submit").addEventListener('click', () => submit(Date.now()));
         document.querySelector("#skip").addEventListener('click', () => skip(Date.now()));
+
+        import d3 from "https://d3js.org/d3.v7.min.js";
+
+        var Lstar = Math.random()*100;
+        var astar = Math.random()*320-160;
+        var bstar = Math.random()*320-160;
+
+        var svg = d3.select('#canvas')
+            .append('svg')
+                .attr('width',200)
+                .attr('height',200);
+
+        var circle = svg.append('circle')
+            .attr('cx',100)
+            .attr('cy',100)
+            .attr('r',50)
+            .attr('fill',d3.lab(Lstar,astar,bstar))
+            .attr('stroke','black');
     </script>
 </body>
 </html>
