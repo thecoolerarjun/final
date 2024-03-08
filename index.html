@@ -315,12 +315,13 @@
             .attr('r',50)
             .attr('fill',d3.lab(Lstar,astar,bstar))
             .attr('stroke','black');
+
+        var test = document.getElementById("test");
         
         function next(userId) {
-            var test = document.getElementById("test");
-            var beauty = test.getElementById("beauty").value;
-            var health = test.getElementById("health").value;
-            var temperature = test.getElementById("temperature").value;
+            var beauty = test.querySelector("#beauty").value;
+            var health = test.querySelector("#health").value;
+            var temperature = test.querySelector("#temperature").value;
 
             const db = getDatabase();
             set(ref(db, 'users/' + userId + '/test/colors/'),
@@ -337,7 +338,7 @@
             health = 128;
             temperature = 128;
             localStorage.questionNumber++;
-            test.getElementById("displayNumber").text = "You are on color " + localStorage.questionNumber + " of 20.";
+            test.querySelector("displayNumber").text = "You are on color " + localStorage.questionNumber + " of 20.";
             circle.attr('fill',d3.lab(Lstar,astar,bstar));
 
             if (questionNumber > 20) {
@@ -346,7 +347,6 @@
             }
         }
         
-        var test = document.getElementById("test");
         test.querySelector("#next").addEventListener('click', () => next(localStorage.userId));
     </script>
 
