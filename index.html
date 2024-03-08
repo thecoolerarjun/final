@@ -18,9 +18,10 @@
    <p>The following test was created by Arjun Vyavaharkar. If you have any questions, feel free to send an email at the address, '<a href="mailto:apvyavaharkar@wpi.edu">apvyavaharkar@wpi.edu</a>.'</p>
     </div>
 
-    <button type="button" id="skip">Skip</button>
-
-    <fieldset> Please enter your first and last initials:
+    <button type="button" id="skip" href="test.html">Skip</button>
+    <br>
+    <fieldset>
+        <legend>Please enter your first and last initials:</legend>
         <input id="name"/>
     </fieldset>
 
@@ -177,17 +178,16 @@
         <br>
         <input type="checkbox" class="religion">Other (not listed): <input id="otherReligion" /></input>
     </fieldset>
-
-    <button type="button" id="submit">Submit</button>
+    <br>
+    <button type="button" id="submit" href="test.html">Submit</button>
 
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+        // Documentation: https://firebase.google.com/docs/web/setup#available-libraries
       
-        // Your web app's Firebase configuration
+        // Firebase configuration
         const firebaseConfig = {
           apiKey: "AIzaSyD9iR4okBA8TRKZZtOGd_F57CF54kQpExQ",
           authDomain: "colorassn.firebaseapp.com",
@@ -204,6 +204,7 @@
         // Initialize Realtime Database and get a reference to the service
         const database = getDatabase(app);
 
+        // Button functions
         function skip(userId) {
             var name = "";
             var userGender = ["Prefer not to say"];

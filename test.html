@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen and (orientation:portrait)"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+    <script src="https://d3js.org/d3.v6.min.js" />
+    <title> COLOR ASSN </title>
+</head>
+
+<body>
+    <!-- HTML5 article tag for content -->
+    <div id="content">
+   
+    <header>COLOR ASSOCIATION TEST</header>
+
+   <h1>Color Association Test</h1>
+   <p>Drag any combination of the three sliders to rate the displayed color on the axes of healthfulness, aesthetic appeal, and temperature.</p>
+   <p>There are no right or wrong answers, and the options presented by the sliders are not necessarily mutually exclusive.</p>
+   <p>Once you think you are ready to submit, click the submit button to move on to the next color. There will be 20 total.</p>
+    </div>
+
+    <div id="canvas" />
+
+    <button type="button" id="submit">Submit</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        // Documentation: https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyD9iR4okBA8TRKZZtOGd_F57CF54kQpExQ",
+          authDomain: "colorassn.firebaseapp.com",
+          databaseURL: "https://colorassn-default-rtdb.firebaseio.com/",
+          projectId: "colorassn",
+          storageBucket: "colorassn.appspot.com",
+          messagingSenderId: "820973011771",
+          appId: "1:820973011771:web:80d213bbd5a510cc2d2d1e"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Initialize Realtime Database and get a reference to the service
+        const database = getDatabase(app);
+
+        // D3.js canvas code
+        var Lstar = Math.random()*100;
+        var astar = Math.random()*320-160;
+        var bstar = Math.random()*320-160;
+
+        var svg = d3.select('#canvas')
+            .append('svg')
+            .append('width',200)
+            .append('height',200);
+        var circle = svg.append('circle')
+            .attr('cx',100)
+            .attr('cy',100)
+            .attr('r',50)
+            .attr('fill',d3.lab(Lstar,astar,bstar))
+            .attr('stroke','black');
+    </script>
+</body>
+</html>
