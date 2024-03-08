@@ -315,10 +315,9 @@
             .attr('r',50)
             .attr('fill',d3.lab(Lstar,astar,bstar))
             .attr('stroke','black');
-
-        var test = document.getElementById("test");
         
         function next(userId) {
+            var test = document.getElementById("test");
             var beauty = test.getElementById("beauty").value;
             var health = test.getElementById("health").value;
             var temperature = test.getElementById("temperature").value;
@@ -347,6 +346,7 @@
             }
         }
         
+        var test = document.getElementById("test");
         test.querySelector("#next").addEventListener('click', () => next(localStorage.userId));
     </script>
 
