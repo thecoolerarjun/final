@@ -325,14 +325,15 @@
             var beauty = test.querySelector("#beauty").value;
             var health = test.querySelector("#health").value;
             var temperature = test.querySelector("#temperature").value;
+            var index = localStorage.questionNumber;
 
             const db = getDatabase();
-            set(ref(db, 'users/' + userId + '/test/colors/'),
-                (Lstar,astar,bstar)
-            );
-            set(ref(db, 'users/' + userId + '/test/answers/'),
-                (beauty,health,temperature)
-            );
+            set(ref(db, 'users/' + userId + '/test/colors/'), {
+                index:(Lstar,astar,bstar)
+            });
+            set(ref(db, 'users/' + userId + '/test/answers/'), {
+                index:(beauty,health,temperature)
+            });
             
             Lstar = Math.random()*100;
             astar = Math.random()*320-160;
