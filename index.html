@@ -11,14 +11,16 @@
     <!-- HTML5 article tag for content -->
     <div id="content">
    
-    <header>COLOR ASSN</header>
+    <header>COLOR ASSOCIATION TEST</header>
 
-   <h1>Welcome to Color Assn</h1>
+   <h1>Welcome to Color Association Test</h1>
    <p>If you feel comfortable, please consider filling out the following pre-test questionnaire. If you are finished or do not wish to do so, then please click the "Skip" or "Submit" buttons to load the test and instructions.</p>
    <p>The following test was created by Arjun Vyavaharkar. If you have any questions, feel free to send an email at the address, '<a href="mailto:apvyavaharkar@wpi.edu">apvyavaharkar@wpi.edu</a>.'</p>
     </div>
 
-    <fieldset> Please enter your name:
+    <button type="button" id="skip">Skip</button>
+
+    <fieldset> Please enter your first and last initials:
         <input id="name"/>
     </fieldset>
 
@@ -202,6 +204,25 @@
         // Initialize Realtime Database and get a reference to the service
         const database = getDatabase(app);
 
+        function skip(userId) {
+            var name = "";
+            var userGender = ["Prefer not to say"];
+            var userRace = ["Nondescript"];
+            var userReligion = ["Unaffiliated"];
+
+            const db = getDatabase();
+            set(ref(db, 'users/' + userId), {
+                name: name,
+                genders: userGender,
+                races: userRace,
+                religions: userReligion
+            });
+
+            localStorage.userId = userId;
+            document.getElementById("submit").visibility = "hidden";
+            document.getElementById("skip").visibility = "hidden";
+        }
+
         function submit(userId) {
             var name = document.getElementById("name").value;
             var gender = document.getElementsByClassName("gender");
@@ -258,9 +279,14 @@
                 races: userRace,
                 religions: userReligion
             });
+
+            localStorage.userId = userId;
+            document.getElementById("submit").visibility = "hidden";
+            document.getElementById("skip").visibility = "hidden";
         }
 
         document.querySelector("#submit").addEventListener('click', () => submit(Date.now()));
+        document.querySelector("#skip").addEventListener('click', () => skip(Date.now()));
     </script>
 </body>
 </html>
