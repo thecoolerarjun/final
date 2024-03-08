@@ -100,7 +100,7 @@
             <br>
             <input type="checkbox" value="North African" class="race">North African</input>
             <br>
-            <input type="checkbox" value="Eurasian" class="race">North African</input>
+            <input type="checkbox" value="Eurasian" class="race">Eurasian</input>
             <br>
             <input type="checkbox" value="Central Asian" class="race">Central Asian</input>
             <br>
@@ -333,7 +333,7 @@
                 astar:astar,
                 bstar:bstar
             });
-            set(ref(db, `users/${userId}/test/colors/${index}/`), {
+            set(ref(db, `users/${userId}/test/answers/${index}/`), {
                 beauty:beauty,
                 health:health,
                 temperature:temperature
@@ -351,6 +351,7 @@
 
             if (localStorage.questionNumber > 20) {
                 test.style.display = "none";
+                document.getElementById("canvas").style.display = "none";
                 document.getElementById("finalMessage").innerHTML = "All done! Thank you for participating! You may now exit the window.";
             }
         }
@@ -367,16 +368,16 @@
         <p id="displayNumber">You are on color 1 of 20.</p>
 
         <br>
-        Ugly   <input type="range" min="0" max="255" step="1" value="128" id="beauty" /> Pretty
+        <label align="center">Ugly</label><input align="center" type="range" min="0" max="255" step="1" value="128" id="beauty" /><label>Pretty</label>
         <br>
-        Sickly <input type="range" min="0" max="255" step="1" value="128" id="health"/> Healthy
+        <label align="center">Sickly</label><input align="center" type="range" min="0" max="255" step="1" value="128" id="health"/><label>Healthy</label>
         <br>
-        Cool   <input type="range" min="0" max="255" step="1" value="128" id="temperature"/> Warm
+        <label align="center">Cool</label><input align="center" type="range" min="0" max="255" step="1" value="128" id="temperature"/><label>Warm</label>
         <br>
         <button id="next">Next</button>
     </div>
 
-    <div id="canvas" />
+    <div id="canvas" align="center" />
 
     <p id="finalMessage" />
 </body>
