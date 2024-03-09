@@ -16,9 +16,7 @@
    <h1>Color Association Test - Results</h1>
     </div>
 
-    <div id="canvas" />
-
-    <button type="button" id="submit">Submit</button>
+    <div id="chartholder" />
 
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -42,6 +40,53 @@
 
         // Initialize Realtime Database and get a reference to the service
         const database = getDatabase(app);
+
+        // D3.js code block
+        import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+        import x3dom from "https://x3dom.org/download/1.8.3/x3dom.js";
+        import * as d3X3d from "https://raw.githack.com/jamesleesaunders/d3-x3d/master/dist/d3-x3d.js";
+
+        // NONE OF THIS CODE IS MINE. THIS IS JUST A TEST.
+        function loadChart(data) {
+            // Select chartholder
+            var chartHolder = d3.select("#chartholder");
+
+            // Declare the chart component
+            var myChart = d3.x3d.chart.particlePlot()
+            .mappings({ x: "ridge", y: "nub", z: "crack", size: "density", color: "weight" })
+            .colors(d3.schemeRdYlGn[8]);
+
+            // Generate chart
+            chartHolder.datum(data).call(myChart);
+        }
+
+        // Generate Chart fro Pollen CSV Data
+        // Source: http://metagrid2.sv.vt.edu/~npolys/InfoVis2019/pollen.csv
+        d3.csv("../pollen.csv")
+            .then((data) => {
+            var points = data.map((d) => {
+                return {
+                key: 'Point' + d.OBSERVATION_NUMBER,
+                values: [
+                    { key: "weight", value: +d.WEIGHT },
+                    { key: "density", value: +d.DENSITY },
+                    { key: "ridge", value: +d.RIDGE },
+                    { key: "nub", value: +d.NUB },
+                    { key: "crack", value: +d.CRACK },
+                ]
+                };
+            });
+
+            var pollenData = {
+                key: 'Pollen',
+                values: points
+            };
+
+            loadChart(pollenData);
+            })
+            .finally(() => {
+            x3dom.reload();
+            });
     </script>
 </body>
 </html>
