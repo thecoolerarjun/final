@@ -1,63 +1,92 @@
-<!-- NONE OF THIS CODE IS MINE. I'M TESTING WHETHER X3DOM ACTUALLY WORKS -->
 <!DOCTYPE html>
+
 <html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://x3dom.org/release/x3dom.css" media="screen and (orientation:portrait)"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+    <title> COLOR ASSN </title>
+</head>
 
-  <head>
-    <title>d3-x3d : 3D Particle Plot Example</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://x3dom.org/release/x3dom-full.js"></script>
-    <link rel="stylesheet" href="https://x3dom.org/release/x3dom.css"/>
-    <script src="https://raw.githack.com/jamesleesaunders/d3-x3d/master/dist/d3-x3d.js"></script>
-  </head>
+<body>
+    <!-- HTML5 article tag for content -->
+    <div id="content">
+   
+    <header>COLOR ASSOCIATION TEST - RESULTS</header>
 
-  <body>
-    <div id="chartholder"></div>
+   <h1>Color Association Test - Results</h1>
+    </div>
 
-    <script>
-      function loadChart(data) {
-        // Select chartholder
-        var chartHolder = d3.select("#chartholder");
+    <div id="chartholder" />
 
-        // Declare the chart component
-        var myChart = d3.x3d.chart.particlePlot()
-          .mappings({ x: "ridge", y: "nub", z: "crack", size: "density", color: "weight" })
-          .colors(d3.schemeRdYlGn[8]);
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        // Documentation: https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyD9iR4okBA8TRKZZtOGd_F57CF54kQpExQ",
+          authDomain: "colorassn.firebaseapp.com",
+          databaseURL: "https://colorassn-default-rtdb.firebaseio.com/",
+          projectId: "colorassn",
+          storageBucket: "colorassn.appspot.com",
+          messagingSenderId: "820973011771",
+          appId: "1:820973011771:web:80d213bbd5a510cc2d2d1e"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
 
-        // Generate chart
-        chartHolder.datum(data).call(myChart);
-      }
+        // Initialize Realtime Database and get a reference to the service
+        const database = getDatabase(app);
 
-      // Generate Chart fro Pollen CSV Data
-      // Source: http://metagrid2.sv.vt.edu/~npolys/InfoVis2019/pollen.csv
-      d3.csv("./pollen.csv")
-        .then((data) => {
-          var points = data.map((d) => {
-            return {
-              key: 'Point' + d.OBSERVATION_NUMBER,
-              values: [
-                { key: "weight", value: +d.WEIGHT },
-                { key: "density", value: +d.DENSITY },
-                { key: "ridge", value: +d.RIDGE },
-                { key: "nub", value: +d.NUB },
-                { key: "crack", value: +d.CRACK },
-              ]
+        // D3.js code block
+        import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+        import x3dom from "https://x3dom.org/download/1.8.3/x3dom.js";
+        import * as d3X3d from "https://raw.githack.com/jamesleesaunders/d3-x3d/master/dist/d3-x3d.js";
+
+        // NONE OF THIS CODE IS MINE. THIS IS JUST A TEST.
+        function loadChart(data) {
+            // Select chartholder
+            var chartHolder = d3.select("#chartholder");
+
+            // Declare the chart component
+            var myChart = d3.x3d.chart.particlePlot()
+            .mappings({ x: "ridge", y: "nub", z: "crack", size: "density", color: "weight" })
+            .colors(d3.schemeRdYlGn[8]);
+
+            // Generate chart
+            chartHolder.datum(data).call(myChart);
+        }
+
+        // Generate Chart fro Pollen CSV Data
+        // Source: http://metagrid2.sv.vt.edu/~npolys/InfoVis2019/pollen.csv
+        d3.csv("./pollen.csv")
+            .then((data) => {
+            var points = data.map((d) => {
+                return {
+                key: 'Point' + d.OBSERVATION_NUMBER,
+                values: [
+                    { key: "weight", value: +d.WEIGHT },
+                    { key: "density", value: +d.DENSITY },
+                    { key: "ridge", value: +d.RIDGE },
+                    { key: "nub", value: +d.NUB },
+                    { key: "crack", value: +d.CRACK },
+                ]
+                };
+            });
+
+            var pollenData = {
+                key: 'Pollen',
+                values: points
             };
-          });
 
-          var pollenData = {
-            key: 'Pollen',
-            values: points
-          };
-
-          loadChart(pollenData);
-        })
-        .finally(() => {
-          x3dom.reload();
-        });
+            loadChart(pollenData);
+            })
+            .finally(() => {
+            x3dom.reload();
+            });
     </script>
-
-    <br/>
-    
-  </body>
-
+</body>
 </html>
