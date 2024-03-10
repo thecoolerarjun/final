@@ -85,6 +85,11 @@
 
         var j = 0;
 
+        var pollenData = {
+                key: 'Pollen',
+                values: []
+        };
+
         for (uid in window.userData) {
             for (i in ud[uid]['test']['answers']) {
                 C[j] = ud[uid]['test']['answers'][i]['beauty'];
@@ -96,35 +101,23 @@
                 bstar[j] = ud[uid]['test']['colors'][i]['bstar'];
 
                 indices[j] = j;
+
+                pollenData.values.push({
+                key: 'Point' + indices[j],
+                values: [
+                    { key: "Lstar", value: Lstar[j] },
+                    { key: "astar", value: astar[j] },
+                    { key: "bstar", value: bstar[j] },
+                    { key: "cmy", value: d3.rgb(255-C[j],255-M[j],255-Y[j]) },
+                ]
+                })
+
                 j++;
             }
         }
 
-        d3.csv('./pollen.csv').then((data) => {
-            var points = data.map((d) => {
-                console.log(d.NUB);
-                window.nub = d.NUB;
-                return {
-                key: 'Point' + indices,
-                values: [
-                    { key: "Lstar", value: +Lstar },
-                    { key: "astar", value: +astar },
-                    { key: "bstar", value: +bstar },
-                    { key: "cmy", value: +d3.rgb(255-C,255-M,255-Y) },
-                ]
-                };
-            });
-
-            var pollenData = {
-                key: 'Pollen',
-                values: points
-            };
-
-            load(pollenData);
-            })
-            .finally(() => {
-            x3dom.reload();
-            });
+        load(pollenData);
+        x3dom.reload();
     </script>
 </body>
 </html>
