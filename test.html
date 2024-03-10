@@ -45,7 +45,7 @@
         const database = getDatabase(app);
 
         const dbRef = ref(getDatabase());
-        get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+        get(child(dbRef, `${users}/`)).then((snapshot) => {
             if (snapshot.exists()) {
                 console.log(snapshot.val());
                 localStorage.snapshot = snapshot.val();
