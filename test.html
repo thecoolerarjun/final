@@ -65,7 +65,7 @@
 
             // Declare the chart component
             var scatter = d3.x3d.chart.particlePlot()
-                .mappings({ x: "Lstar", y: "astar", z: "bstar" });
+                .mappings({ x: "Lstar", y: "astar", z: "bstar", color: "cmy" });
 
             // Generate chart
             chartHolder.datum(data).call(scatter);
@@ -102,12 +102,14 @@
 
         d3.csv('./pollen.csv').then((data) => {
             var points = data.map((d) => {
+                console.log(d.NUB);
                 return {
                 key: 'Point' + indices,
                 values: [
                     { key: "Lstar", value: +Lstar },
                     { key: "astar", value: +astar },
-                    { key: "bstar", value: +bstar }
+                    { key: "bstar", value: +bstar },
+                    { key: "cmy", value: +d3.rgb(255-C,255-M,255-Y) },
                 ]
                 };
             });
