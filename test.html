@@ -47,7 +47,7 @@
         const dbRef = ref(getDatabase());
         get(child(dbRef, `/`)).then((snapshot) => {
             if (snapshot.exists()) {
-                localStorage.userData = { users:snapshot.val().users };
+                localStorage["userData"] = snapshot.val().users;
             } else {
                 console.log("No data available");
             }
