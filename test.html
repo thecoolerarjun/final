@@ -103,6 +103,7 @@
         d3.csv('./pollen.csv').then((data) => {
             var points = data.map((d) => {
                 console.log(d.NUB);
+                window.nub = d.NUB;
                 return {
                 key: 'Point' + indices,
                 values: [
