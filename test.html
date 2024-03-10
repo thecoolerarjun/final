@@ -69,37 +69,37 @@
 
             // Generate chart
             chartHolder.datum(data).call(scatter);
-            
-            var C = [];
-            var M = [];
-            var Y = [];
-
-            var Lstar = [];
-            var astar = [];
-            var bstar = [];
-
-            var indices = [];
-
-            var j = 0;
-
-            for (uid in window.userData) {
-                for (i in ud[uid]['test']['answers']) {
-                    C[j] = ud[uid]['test']['answers'][i]['beauty'];
-                    M[j] = ud[uid]['test']['answers'][i]['health'];
-                    Y[j] = ud[uid]['test']['answers'][i]['temperature'];
-
-                    Lstar[j] = ud[uid]['test']['colors'][i]['Lstar'];
-                    astar[j] = ud[uid]['test']['colors'][i]['astar'];
-                    bstar[j] = ud[uid]['test']['colors'][i]['bstar'];
-
-                    indices[j] = j;
-                    j++;
-                }
-            }
         }
 
         // Generate Chart from Pollen CSV Data
         // Source: http://metagrid2.sv.vt.edu/~npolys/InfoVis2019/pollen.csv
+        var C = [];
+        var M = [];
+        var Y = [];
+
+        var Lstar = [];
+        var astar = [];
+        var bstar = [];
+
+        var indices = [];
+
+        var j = 0;
+
+        for (uid in window.userData) {
+            for (i in ud[uid]['test']['answers']) {
+                C[j] = ud[uid]['test']['answers'][i]['beauty'];
+                M[j] = ud[uid]['test']['answers'][i]['health'];
+                Y[j] = ud[uid]['test']['answers'][i]['temperature'];
+
+                Lstar[j] = ud[uid]['test']['colors'][i]['Lstar'];
+                astar[j] = ud[uid]['test']['colors'][i]['astar'];
+                bstar[j] = ud[uid]['test']['colors'][i]['bstar'];
+
+                indices[j] = j;
+                j++;
+            }
+        }
+
         d3.csv('./pollen.csv').then((data) => {
             var points = data.map((d) => {
                 return {
