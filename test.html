@@ -4,8 +4,11 @@
 <head>
     <title> COLOR ASSN </title>
     <link rel="stylesheet" href="https://x3dom.org/release/x3dom.css" />
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
     <script src="https://x3dom.org/release/x3dom-full.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-x3d@2.1.5/dist/d3-x3d.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
 </head>
 
@@ -21,9 +24,6 @@
     <div id="chartholder"></div>
 
     <script>
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
         // Documentation: https://firebase.google.com/docs/web/setup#available-libraries
       
         // Firebase configuration
@@ -42,9 +42,6 @@
 
         // Initialize Realtime Database and get a reference to the service
         const database = getDatabase(app);
-
-        // D3.js code block
-        import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
         // NONE OF THIS CODE IS MINE. THIS IS JUST A TEST.
         function loadChart(data) {
