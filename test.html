@@ -45,10 +45,10 @@
         const database = getDatabase(app);
 
         const dbRef = ref(getDatabase());
-        get(child(dbRef, `${users}/`)).then((snapshot) => {
+        get(child(dbRef, `/`)).then((snapshot) => {
             if (snapshot.exists()) {
-                console.log(snapshot.val());
-                localStorage.snapshot = snapshot.val();
+                console.log(snapshot.val().users);
+                localStorage.snapshot = snapshot.val().users;
             } else {
                 console.log("No data available");
             }
