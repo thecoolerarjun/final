@@ -47,6 +47,7 @@
         const db = getDatabase();
 
         const userRef = ref(db, 'users/');
+        localStorage.userRef = userRef;
         onValue(userRef, (snapshot) => {
         const userData = snapshot.val();
         localStorage.userData = userData;
