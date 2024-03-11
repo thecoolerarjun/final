@@ -65,7 +65,7 @@
 
             // Declare the chart component
             var scatter = d3.x3d.chart.particlePlot()
-                .mappings({ x: "Lstar", y: "astar", z: "bstar", color: "cmy" });
+                .mappings({ x: "Lstar", y: "astar", z: "bstar" });
 
             // Generate chart
             chartHolder.datum(data).call(scatter);
@@ -107,8 +107,7 @@
                 values: [
                     { key: "Lstar", value: Lstar[j] },
                     { key: "astar", value: astar[j] },
-                    { key: "bstar", value: bstar[j] },
-                    { key: "cmy", value: d3.rgb(255-C[j],255-M[j],255-Y[j]) },
+                    { key: "bstar", value: bstar[j] }
                 ]
                 })
 
