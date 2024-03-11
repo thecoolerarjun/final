@@ -90,6 +90,8 @@
                 values: []
         };
 
+        console.log(window.userData);
+
         for (uid in window.userData) {
             for (i in window.userData[uid]['test']['answers']) {
                 C[j] = window.userData[uid]['test']['answers'][i]['beauty'];
@@ -115,9 +117,6 @@
                 j++;
             }
         }
-
-        window.colorAssn = colorAssn;
-        console.log(colorAssn);
 
         load(colorAssn);
         x3dom.reload();
