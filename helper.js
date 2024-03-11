@@ -56,5 +56,7 @@ for (uid in window.userData) {
     }
 }
 
+window.colorAssn = colorAssn;
+
 load(colorAssn);
 x3dom.reload();
