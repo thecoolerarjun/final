@@ -65,7 +65,7 @@
 
             // Declare the chart component
             var scatter = d3.x3d.chart.particlePlot()
-                .mappings({ x: "Lstar", y: "astar", z: "bstar" });
+                .mappings({ x: "Lstar", y: "astar", z: "bstar", color: "cmy" });
 
             // Generate chart
             chartHolder.datum(data).call(scatter);
@@ -85,8 +85,8 @@
 
         var j = 0;
 
-        var pollenData = {
-                key: 'Pollen',
+        var colorAssn = {
+                key: 'ColorAssn',
                 values: []
         };
 
@@ -102,12 +102,13 @@
 
                 indices[j] = j;
 
-                pollenData.values.push({
+                colorAssn.values.push({
                 key: 'Point' + indices[j],
                 values: [
                     { key: "Lstar", value: Lstar[j] },
                     { key: "astar", value: astar[j] },
-                    { key: "bstar", value: bstar[j] }
+                    { key: "bstar", value: bstar[j] },
+                    { key: "cmy", value: d3.rgb(255-C[j],255-M[j],255-Y[j]) },
                 ]
                 })
 
@@ -115,7 +116,7 @@
             }
         }
 
-        load(pollenData);
+        load(colorAssn);
         x3dom.reload();
     </script>
 </body>
