@@ -45,17 +45,17 @@
         const database = getDatabase(app);
 
         const dbRef = ref(getDatabase());
-        // get(child(dbRef, `/`)).then((snapshot) => {
-        //     if (snapshot.exists()) {
-        //         console.log(snapshot.val().users);
-        //         window.userData = snapshot.val().users;
-        //     } else {
-        //         console.log("No data available");
-        //     }
-        // }).catch((error) => {
-        //     console.error(error);
-        // });
-        window.userData = get(child(dbRef, `/`)).val().users;
+        get(child(dbRef, `/`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val().users);
+                window.userData = snapshot.val().users;
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+        console.log(get(child(dbRef, `/`)));
     </script>
 
     <script>
