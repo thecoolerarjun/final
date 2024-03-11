@@ -55,12 +55,12 @@
         }).catch((error) => {
             console.error(error);
         });
-        helper();
+        helper(window.userData);
     </script>
 
     <script>
         // SOME OF THIS CODE IS MINE. THIS IS JUST A TEST.
-        function helper() {
+        function helper(input) {
             function load(data) {
                 // Select chartholder
                 var chartHolder = d3.select("#scatter");
@@ -92,7 +92,7 @@
                     values: []
             };
 
-            for (uid in window.userData) {
+            for (uid in input) {
                 for (i in ud[uid]['test']['answers']) {
                     C[j] = ud[uid]['test']['answers'][i]['beauty'];
                     M[j] = ud[uid]['test']['answers'][i]['health'];
