@@ -91,14 +91,14 @@
         };
 
         for (uid in window.userData) {
-            for (i in ud[uid]['test']['answers']) {
-                C[j] = ud[uid]['test']['answers'][i]['beauty'];
-                M[j] = ud[uid]['test']['answers'][i]['health'];
-                Y[j] = ud[uid]['test']['answers'][i]['temperature'];
+            for (i in window.userData[uid]['test']['answers']) {
+                C[j] = window.userData[uid]['test']['answers'][i]['beauty'];
+                M[j] = window.userData[uid]['test']['answers'][i]['health'];
+                Y[j] = window.userData[uid]['test']['answers'][i]['temperature'];
 
-                Lstar[j] = ud[uid]['test']['colors'][i]['Lstar'];
-                astar[j] = ud[uid]['test']['colors'][i]['astar'];
-                bstar[j] = ud[uid]['test']['colors'][i]['bstar'];
+                Lstar[j] = window.userData[uid]['test']['colors'][i]['Lstar'];
+                astar[j] = window.userData[uid]['test']['colors'][i]['astar'];
+                bstar[j] = window.userData[uid]['test']['colors'][i]['bstar'];
 
                 indices[j] = j;
 
