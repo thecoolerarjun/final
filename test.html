@@ -66,7 +66,7 @@
                 var scatter = d3.select("#scatter");
 
                 // Declare the chart component
-                var plot = d3.x3d.chart.particlePlot()
+                var plot = d3.x3d.chart.bubbleChart()
                     .mappings({ x: "astar", y: "Lstar", z: "bstar", color: "cmy" })
                     .sizeRange([1, 1]);
 
