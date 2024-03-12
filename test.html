@@ -69,11 +69,6 @@
                 var plot = d3.x3d.chart.particlePlot()
                     .mappings({ x: "astar", y: "Lstar", z: "bstar", color: "cmy", size: "size" });
 
-                var xlabel = plot.append("text")
-                    .attr("class", "x label")
-                    .attr("text-anchor", "end")
-                    .attr("text", "a*");
-
                 // Generate chart
                 scatter.datum(data).call(plot);
             }
