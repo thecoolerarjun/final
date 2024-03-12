@@ -62,19 +62,17 @@
         // MOST OF THIS CODE IS MINE. THIS IS JUST A TEST.
         function helper(input) {
             function load(data) {
-                // Select chartholder
-                var chartHolder = d3.select("#scatter");
+                // Select scatter
+                var scatter = d3.select("#scatter");
 
                 // Declare the chart component
                 var scatter = d3.x3d.chart.particlePlot()
-                    .mappings({ x: "astar", y: "Lstar", z: "bstar", color: "cmy" });
+                    .mappings({ x: "astar", y: "Lstar", z: "bstar", color: "cmy", size: "size" });
 
                 // Generate chart
-                chartHolder.datum(data).call(scatter);
+                scatter.datum(data).call(scatter);
             }
 
-            // Generate Chart from Pollen CSV Data
-            // Source: http://metagrid2.sv.vt.edu/~npolys/InfoVis2019/pollen.csv
             var C = [];
             var M = [];
             var Y = [];
@@ -111,6 +109,7 @@
                         { key: "astar", value: astar[j] },
                         { key: "bstar", value: bstar[j] },
                         { key: "cmy", value: d3.rgb(255-C[j],255-M[j],255-Y[j]) },
+                        { key: "size", value: 1 }
                     ]
                     })
 
