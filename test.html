@@ -66,9 +66,8 @@
                 var scatter = d3.select("#scatter");
 
                 // Declare the chart component
-                var plot = d3.x3d.component.bubbles()
-                    .mappings({ x: "astar", y: "Lstar", z: "bstar", color: "cmy", size: "size" })
-                    .sizeRange([10 , 10]);
+                var plot = d3.x3d.chart.particlePlot()
+                    .mappings({ x: "astar", y: "Lstar", z: "bstar", color: "cmy" });
 
                 // Generate chart
                 scatter.datum(data).call(plot);
@@ -109,8 +108,7 @@
                         { key: "Lstar", value: Lstar[j] },
                         { key: "astar", value: astar[j] },
                         { key: "bstar", value: bstar[j] },
-                        { key: "cmy", value: d3.rgb(255-C[j],255-M[j],255-Y[j]) },
-                        { key: "size", value: 10 }
+                        { key: "cmy", value: d3.rgb(255-C[j],255-M[j],255-Y[j]) }
                     ]
                     })
 
