@@ -67,7 +67,8 @@
 
                 // Declare the chart component
                 var plot = d3.x3d.chart.particlePlot()
-                    .mappings({ x: "astar", y: "Lstar", z: "bstar", color: "cmy" });
+                    .mappings({ x: "astar", y: "Lstar", z: "bstar", color: "cmy" })
+                    .colors(colors);
 
                 // Generate chart
                 scatter.datum(data).call(plot);
@@ -90,6 +91,8 @@
                     values: []
             };
 
+            var colors = [];
+
             for (uid in input) {
                 for (i in input[uid]['test']['answers']) {
                     C[j] = input[uid]['test']['answers'][i]['beauty'];
@@ -111,6 +114,7 @@
                         { key: "cmy", value: d3.rgb(255-C[j],255-M[j],255-Y[j]) }
                     ]
                     })
+                    colors.push(d3.rgb(255-C[j],255-M[j],255-Y[j]));
 
                     j++;
                 }
