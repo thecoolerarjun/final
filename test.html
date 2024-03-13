@@ -60,45 +60,26 @@
     <script>
         // MOST OF THIS CODE IS MINE. THIS IS JUST A TEST.
         function helper(input) {
-            var C = [];
-            var M = [];
-            var Y = [];
-
-            var Lstar = [];
-            var astar = [];
-            var bstar = [];
-
-            var indices = [];
-
-            var j = 0;
+            var sub;
 
             var colorAssn = [];
+            var responses = [];
 
             for (uid in input) {
                 for (i in input[uid]['test']['answers']) {
-                    C[j] = input[uid]['test']['answers'][i]['beauty'];
-                    M[j] = input[uid]['test']['answers'][i]['health'];
-                    Y[j] = input[uid]['test']['answers'][i]['temperature'];
-
-                    Lstar[j] = input[uid]['test']['colors'][i]['Lstar'];
-                    astar[j] = input[uid]['test']['colors'][i]['astar'];
-                    bstar[j] = input[uid]['test']['colors'][i]['bstar'];
-
-                    indices[j] = j;
+                    sub = input[uid]['test']['answers'][i];
 
                     colorAssn.push({
-                        x:[astar[j]],y:[bstar[j]],z:[Lstar[j]],
+                        x:[sub['astar']],y:[sub['bstar']],z:[sub['Lstar']],
                         type: 'scatter3d',
                         mode: 'markers',
                         marker: {
                             // symbol: 'circle',
                             size: 8,
                             // opacity: 1,
-                            color: `rgb(${255-C[j]},${255-M[j]},${255-Y[j]})`
+                            color: `rgb(${255-sub['beauty']},${255-sub['health']},${255-sub['temperature']})`
                         }
                     });
-
-                    j++;
                 }
             }
 
