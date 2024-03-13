@@ -2,10 +2,9 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="https://x3dom.org/release/x3dom.css" media="screen and (orientation:portrait)"/>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen and (orientation:portrait)"/>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://x3dom.org/release/x3dom-full.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3-x3d@2.1.5/dist/d3-x3d.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.29.1.min.js"></script>
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
     <title> COLOR ASSN </title>
 </head>
@@ -47,7 +46,7 @@
         const dbRef = ref(getDatabase());
         get(child(dbRef, `/`)).then((snapshot) => {
             if (snapshot.exists()) {
-                console.log(snapshot.val().users);
+                // console.log(snapshot.val().users);
                 window.userData = snapshot.val().users;
                 helper(window.userData);
             } else {
@@ -61,19 +60,6 @@
     <script>
         // MOST OF THIS CODE IS MINE. THIS IS JUST A TEST.
         function helper(input) {
-            function load(data) {
-                // Select scatter
-                var scatter = d3.select("#scatter");
-
-                // Declare the chart component
-                var plot = d3.x3d.chart.particlePlot()
-                    .mappings({ x: "astar", y: "Lstar", z: "bstar", color: "cmy" })
-                    .colors(colors);
-
-                // Generate chart
-                scatter.datum(data).call(plot);
-            }
-
             var C = [];
             var M = [];
             var Y = [];
@@ -106,13 +92,14 @@
                     indices[j] = j;
 
                     colorAssn.values.push({
-                    key: 'Point' + indices[j],
-                    values: [
-                        { key: "Lstar", value: Lstar[j] },
-                        { key: "astar", value: astar[j] },
-                        { key: "bstar", value: bstar[j] },
-                        { key: "cmy", value: d3.rgb(255-C[j],255-M[j],255-Y[j]) }
-                    ]
+                        x:[astar[j]],y:[bstar[j]],z:[Lstar[j]],
+                        mode: 'markers',
+                        marker: {
+                            // symbol: 'circle',
+                            size: 8,
+                            // opacity: 1,
+                            color: `rgb(${255-C[j]},${255-M[j]},${255-Y[j]})`
+                        },
                     })
                     colors.push(d3.rgb(255-C[j],255-M[j],255-Y[j]));
 
@@ -120,10 +107,16 @@
                 }
             }
 
-            window.colorAssn = colorAssn;
+            var layout = {
+                margin: {
+                    l: 0,
+                    r: 0,
+                    b: 0,
+                    t: 0
+                }
+            }
 
-            load(colorAssn);
-            x3dom.reload();
+            Plotly.newPlot('scatter',colorAssn,layout);
         }
     </script>
 </body>
