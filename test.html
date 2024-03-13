@@ -120,7 +120,8 @@
                 }
             }
 
-            var scatter = document.createElement('div',{id:'scatter'});
+            var scatter = document.createElement('div');
+            scatter.id = 'scatter';
             Plotly.newPlot('scatter',colorAssn,layout);
         }
     </script>
