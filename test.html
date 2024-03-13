@@ -74,8 +74,6 @@
 
             var colorAssn = [];
 
-            var colors = [];
-
             for (uid in input) {
                 for (i in input[uid]['test']['answers']) {
                     C[j] = input[uid]['test']['answers'][i]['beauty'];
@@ -98,8 +96,7 @@
                             color: `rgb(${255-C[j]},${255-M[j]},${255-Y[j]})`
                         },
                         type: 'scatter3d'
-                    })
-                    colors.push(d3.rgb(255-C[j],255-M[j],255-Y[j]));
+                    });
 
                     j++;
                 }
@@ -111,6 +108,15 @@
                     r: 0,
                     b: 0,
                     t: 0
+                },
+                xaxis: {
+                    title: 'a*'
+                },
+                yaxis: {
+                    title: 'b*'
+                },
+                zaxis: {
+                    title: 'L*'
                 }
             }
 
