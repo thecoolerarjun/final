@@ -70,7 +70,7 @@
 
             var layout = {
                 width: 500,
-                height:500,
+                height: 500,
                 margin: {
                     l: 0,
                     r: 0,
@@ -93,6 +93,11 @@
                             text: 'L*'
                         }
                     }
+                },
+                domain: {
+                    x: [-160,160],
+                    y: [-160,160],
+                    z: [0,100]
                 }
             }
             var name;
@@ -116,7 +121,8 @@
                             size: 8,
                             // opacity: 1,
                             color: `rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`
-                        }
+                        },
+                        name: `${name}${i}`
                     }
                     colorAssn.push(data);
                     responses[j].push(data);
