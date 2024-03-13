@@ -88,14 +88,14 @@
 
                     colorAssn.push({
                         x:[astar[j]],y:[bstar[j]],z:[Lstar[j]],
+                        type: 'scatter3d',
                         mode: 'markers',
                         marker: {
                             // symbol: 'circle',
                             size: 8,
                             // opacity: 1,
                             color: `rgb(${255-C[j]},${255-M[j]},${255-Y[j]})`
-                        },
-                        type: 'scatter3d'
+                        }
                     });
 
                     j++;
@@ -103,12 +103,12 @@
             }
 
             var layout = {
-                margin: {
-                    l: 0,
-                    r: 0,
-                    b: 0,
-                    t: 0
-                },
+                // margin: {
+                //     l: 0,
+                //     r: 0,
+                //     b: 0,
+                //     t: 0
+                // },
                 xaxis: {
                     title: 'a*'
                 },
