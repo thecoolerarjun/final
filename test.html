@@ -60,24 +60,26 @@
     <script>
         // MOST OF THIS CODE IS MINE. THIS IS JUST A TEST.
         function helper(input) {
-            var sub;
+            var ans;
+            var cmy;
 
             var colorAssn = [];
             var responses = [];
 
             for (uid in input) {
                 for (i in input[uid]['test']['answers']) {
-                    sub = input[uid]['test']['answers'][i];
+                    ans = input[uid]['test']['answers'][i];
+                    cmy = input[uid]['test']['colors'][i];
 
                     colorAssn.push({
-                        x:[sub['astar']],y:[sub['bstar']],z:[sub['Lstar']],
+                        x:[ans['astar']],y:[ans['bstar']],z:[ans['Lstar']],
                         type: 'scatter3d',
                         mode: 'markers',
                         marker: {
                             // symbol: 'circle',
                             size: 8,
                             // opacity: 1,
-                            color: `rgb(${255-sub['beauty']},${255-sub['health']},${255-sub['temperature']})`
+                            color: `rgb(${255-cmy['beauty']},${255-cmy['health']},${255-cmy['temperature']})`
                         }
                     });
                 }
