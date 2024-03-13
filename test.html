@@ -69,17 +69,17 @@
             for (uid in input) {
                 for (i in input[uid]['test']['answers']) {
                     ans = input[uid]['test']['answers'][i];
-                    cmy = input[uid]['test']['colors'][i];
+                    lab = input[uid]['test']['colors'][i];
 
                     colorAssn.push({
-                        x:[ans['astar']],y:[ans['bstar']],z:[ans['Lstar']],
+                        x:[lab['astar']],y:[lab['bstar']],z:[lab['Lstar']],
                         type: 'scatter3d',
                         mode: 'markers',
                         marker: {
                             // symbol: 'circle',
                             size: 8,
                             // opacity: 1,
-                            color: `rgb(${255-cmy['beauty']},${255-cmy['health']},${255-cmy['temperature']})`
+                            color: `rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`
                         }
                     });
                 }
