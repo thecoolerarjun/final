@@ -112,8 +112,10 @@
                     responses[j].push(data);
                 } document.body.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));
                 Plotly.newPlot(`res${j}`,responses[j],layout);j++;
+                document.body.appendChild(document.createElement('br'));
             }
 
+            document.body.appendChild(Object.assign(document.createElement('h2'),{textContent:'All responses',align:'center'}));
             var scatter = document.createElement('div');
             scatter.id = 'scatter';
             document.body.appendChild(scatter);
