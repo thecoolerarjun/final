@@ -91,7 +91,7 @@
             for (uid in input) {
                 responses.push([]);
                 name = input[uid]['name'].toUpperCase();
-                h2 = Object.assign(document.createElement('h2'),{textContent:`${name}'s responses`});
+                h2 = Object.assign(document.createElement('h2'),{textContent:`${name}'s responses`,align:'center'});
                 document.body.appendChild(h2);
                 for (i in input[uid]['test']['answers']) {
                     ans = input[uid]['test']['answers'][i];
