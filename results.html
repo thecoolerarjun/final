@@ -58,7 +58,6 @@
     </script>
 
     <script>
-        // MOST OF THIS CODE IS MINE. THIS IS JUST A TEST.
         function helper(input) {
             var ans;
             var lab;
@@ -106,7 +105,8 @@
 
             for (uid in input) {
                 responses.push([]);
-                name = input[uid]['name'].toUpperCase();
+                // name = input[uid]['name'].toUpperCase();
+                name = `U${input.indexOf(uid)}`;
                 h2 = Object.assign(document.createElement('h2'),{textContent:`${name}'s responses`,align:'center'});
                 document.body.appendChild(h2);
                 for (i in input[uid]['test']['answers']) {
@@ -121,9 +121,10 @@
                             // symbol: 'circle',
                             size: 8,
                             // opacity: 1,
-                            color: `rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`
+                            color: `rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`,
+                            text: `Beauty: ${ans['beauty']}\nHealth: ${ans['health']}\nTemperature: ${ans['temperature']}`
                         },
-                        name: `${name}${i}`
+                        name: `${name}R${i}`
                     }
                     colorAssn.push(data);
                     responses[j].push(data);
