@@ -124,7 +124,7 @@
                             color: `rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`
                         },
                         name: `${name}R${i}`,
-                        // hovertemplate: `<i>L</i>*: ${lab['Lstar']}<br><i>a</i>*: ${lab['astar']}<br><i>b</i>*: ${lab['bstar']}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`
+                        hovertemplate: `<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`
                     }
                     colorAssn.push(data);
                     responses[j].push(data);
