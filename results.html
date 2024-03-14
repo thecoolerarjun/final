@@ -17,6 +17,16 @@
 
    <h1>Color Association Test - Results</h1>
     </div>
+    <fieldset>
+        <legend>Select attributes to include:</legend>
+        <input type="checkbox" class="attr">Beauty</input>
+        <br>
+        <input type="checkbox" class="attr">Health</input>
+        <br>
+        <input type="checkbox" class="attr">Temperature</input>
+        <br>
+    </fieldset>
+    <button id="relattr">Reload Attributes</button>
 
     <!-- <div id="scatter"></div> -->
 
@@ -49,6 +59,7 @@
                 // console.log(snapshot.val().users);
                 window.userData = snapshot.val().users;
                 helper(window.userData);
+                document.querySelector("#relattr").addEventListener('click', () => relattr(window.userData));
             } else {
                 console.log("No data available");
             }
@@ -138,6 +149,34 @@
             scatter.id = 'scatter';
             document.body.appendChild(scatter);
             Plotly.newPlot('scatter',colorAssn,layout);
+        }
+
+        function relattr(input) {
+            var showBeauty = document.getElementByClassName("attr")[0].checked;
+            var showHealth = document.getElementByClassName("attr")[1].checked;
+            var showTemperature = document.getElementByClassName("attr")[2].checked;
+
+            var ans;
+            var lab;
+            var j = 0;
+            var responses = [];
+            var colorAssn = [];
+            var update;
+
+            for (uid in input) {
+                responses.push([]);
+                for (i in input[uid]['test']['answers']) {
+                    ans = input[uid]['test']['answers'][i];
+                    lab = input[uid]['test']['colors'][i];
+
+                    update = {
+                        'marker.color': `rgb(${255-ans['beauty']*showBeauty},${255-ans['health']*showHealth},${255-ans['temperature']*showTemperature})`,
+                        hovertemplate: `<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+`<br>Beauty: ${ans['beauty']}`*showBeauty+`<br>Health: ${ans['health']}`*showHealth+`<br>Temperature: ${ans['temperature']}`*showTemperature
+                    }
+                    colorAssn.push(update);
+                    responses[j].push(update);
+                } Plotly.restyle(`res${j}`,responses[j]);j++;
+            } Plotly.restyle('scatter',colorAssn);
         }
     </script>
 </body>
