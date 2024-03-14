@@ -81,21 +81,21 @@
                         range: [-160,160],
                         nticks: 32,
                         title: {
-                            text: '<i>a</i>*'
+                            text: 'a*'
                         }
                     },
                     yaxis: {
                         range: [-160,160],
                         nticks: 32,
                         title: {
-                            text: '<i>b</i>*'
+                            text: 'b*'
                         }
                     },
                     zaxis: {
                         range: [0,100],
                         nticks: 10,
                         title: {
-                            text: '<i>L</i>*'
+                            text: 'L*'
                         }
                     }
                 }
@@ -121,10 +121,10 @@
                             // symbol: 'circle',
                             size: 8,
                             // opacity: 1,
-                            color: `rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`,
-                            hovertemplate: `<i>L</i>*: ${lab['Lstar']}<br><i>a</i>*: ${lab['astar']}<br><i>b</i>*: ${lab['bstar']}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`
+                            color: `rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`
                         },
-                        name: `${name}R${i}`
+                        name: `${name}R${i}`,
+                        hovertemplate: `<i>L</i>*: ${lab['Lstar']}<br><i>a</i>*: ${lab['astar']}<br><i>b</i>*: ${lab['bstar']}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`
                     }
                     colorAssn.push(data);
                     responses[j].push(data);
