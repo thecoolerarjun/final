@@ -76,7 +76,6 @@
             var j = 0;
 
             var colorAssn = [];
-            var responses = [];
 
             var layout = {
                 width: 500,
@@ -115,7 +114,6 @@
             var h2;
 
             for (uid in input) {
-                responses.push([]);
                 // name = input[uid]['name'].toUpperCase();
                 name = `User${j+1}`;
                 data = {
@@ -124,9 +122,10 @@
                     mode: 'markers',
                     marker: {
                         // symbol: 'circle',
-                        size: [],
-                        // opacity: 1,
-                        color: []
+                        size: 16,
+                        opacity: 1,
+                        color: [],
+                        line: {}
                     },
                     name: `${name}'s responses`,
                     hovertemplate: []
@@ -140,8 +139,7 @@
                     data['x'].push(lab['astar']);
                     data['y'].push(lab['bstar']);
                     data['z'].push(lab['Lstar']);
-
-                    data['marker']['size'].push(16);
+                    
                     data['marker']['color'].push(`rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`);
 
                     data['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`);
@@ -149,9 +147,7 @@
                 document.body.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));
                 Plotly.newPlot(`res${j}`,[colorAssn[j]],layout);j++;
                 document.body.appendChild(document.createElement('br'));
-            }
-
-            document.body.appendChild(Object.assign(document.createElement('h2'),{textContent:'All responses',align:'center'}));
+            } document.body.appendChild(Object.assign(document.createElement('h2'),{textContent:'All responses',align:'center'}));
             var scatter = document.createElement('div');
             scatter.id = 'scatter';
             document.body.appendChild(scatter);
@@ -159,39 +155,38 @@
         }
 
         function relattr(input) {
-            // var showBeauty = document.getElementsByClassName("attr")[0].checked;
-            // var showHealth = document.getElementsByClassName("attr")[1].checked;
-            // var showTemperature = document.getElementsByClassName("attr")[2].checked;
+            var showBeauty = document.getElementsByClassName("attr")[0].checked;
+            var showHealth = document.getElementsByClassName("attr")[1].checked;
+            var showTemperature = document.getElementsByClassName("attr")[2].checked;
 
-            // var ans;
-            // var lab;
-            // var j = 0;
-            // var responses = [];
-            // var colorAssn = [];
-            // var update;
-            // var hoverBuffer;
+            var ans;
+            var lab;
+            var j = 0;
+            var colorAssn = [];
+            var update;
+            var hoverBuffer;
 
-            // for (uid in input) {
-            //     responses.push([]);
-            //     for (i in input[uid]['test']['answers']) {
-            //         ans = input[uid]['test']['answers'][i];
-            //         lab = input[uid]['test']['colors'][i];
+            for (uid in input) {
+                update = {
+                    marker: {
+                        color: []
+                    },
+                    hovertemplate: []
+                }
+                for (i in input[uid]['test']['answers']) {
+                    ans = input[uid]['test']['answers'][i];
+                    lab = input[uid]['test']['colors'][i];
 
-            //         hoverBuffer = '';
-            //         if (showBeauty) hoverBuffer+=`<br>Beauty: ${ans['beauty']}`;
-            //         if (showHealth) hoverBuffer+=`<br>Health: ${ans['health']}`;
-            //         if (showTemperature) hoverBuffer+=`<br>Temperature: ${ans['temperature']}`;
+                    hoverBuffer = '';
+                    if (showBeauty) hoverBuffer+=`<br>Beauty: ${ans['beauty']}`;
+                    if (showHealth) hoverBuffer+=`<br>Health: ${ans['health']}`;
+                    if (showTemperature) hoverBuffer+=`<br>Temperature: ${ans['temperature']}`;
 
-            //         update = {
-            //             marker: {
-            //                 color: `rgb(${255-ans['beauty']*showBeauty},${255-ans['health']*showHealth},${255-ans['temperature']*showTemperature})`
-            //             },
-            //             hovertemplate: `<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer
-            //         }
-            //         colorAssn.push(update);
-            //         responses[j].push(update);
-            //     } Plotly.restyle(`res${j}`,responses[j]);j++;
-            // } Plotly.restyle('scatter',colorAssn);
+                    update['marker']['color'].push(`rgb(${255-ans['beauty']*showBeauty},${255-ans['health']*showHealth},${255-ans['temperature']*showTemperature})`);
+                    update['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
+                } colorAssn.push(update);
+                Plotly.restyle(`res${j}`,[colorAssn[j]]);j++;
+            } Plotly.restyle('scatter',colorAssn);
         }
     </script>
 </body>
