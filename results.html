@@ -117,30 +117,37 @@
             for (uid in input) {
                 responses.push([]);
                 // name = input[uid]['name'].toUpperCase();
-                name = `U${j}`;
+                name = `User${j+1}`;
+                data = {
+                    x:[],y:[],z:[],
+                    type: 'scatter3d',
+                    mode: 'markers',
+                    marker: {
+                        // symbol: 'circle',
+                        size: [],
+                        // opacity: 1,
+                        color: []
+                    },
+                    name: `${name}'s responses`,
+                    hovertemplate: []
+                }
                 h2 = Object.assign(document.createElement('h2'),{textContent:`${name}'s responses`,align:'center'});
                 document.body.appendChild(h2);
                 for (i in input[uid]['test']['answers']) {
                     ans = input[uid]['test']['answers'][i];
                     lab = input[uid]['test']['colors'][i];
 
-                    data = {
-                        x:[lab['astar']],y:[lab['bstar']],z:[lab['Lstar']],
-                        type: 'scatter3d',
-                        mode: 'markers',
-                        marker: {
-                            // symbol: 'circle',
-                            size: 8,
-                            // opacity: 1,
-                            color: `rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`
-                        },
-                        name: `${name}R${i}`,
-                        hovertemplate: `<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`
-                    }
-                    colorAssn.push(data);
-                    responses[j].push(data);
-                } document.body.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));
-                Plotly.newPlot(`res${j}`,responses[j],layout);j++;
+                    data['x'].push(lab['astar']);
+                    data['y'].push(lab['bstar']);
+                    data['z'].push(lab['Lstar']);
+
+                    data['marker']['size'].push(8);
+                    data['marker']['color'].push(`rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`);
+
+                    data['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`);
+                } colorAssn.push(data);
+                document.body.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));
+                Plotly.newPlot(`res${j}`,colorAssn[j],layout);j++;
                 document.body.appendChild(document.createElement('br'));
             }
 
@@ -183,8 +190,8 @@
                     }
                     colorAssn.push(update);
                     responses[j].push(update);
-                } Plotly.restyle(`res${j}`,responses[j],[0,Object.keys(input).length-1]);j++;
-            } //Plotly.restyle('scatter',colorAssn,[0,Object.keys(input).length-1]);
+                } Plotly.restyle(`res${j}`,responses[j]);j++;
+            } Plotly.restyle('scatter',colorAssn);
         }
     </script>
 </body>
