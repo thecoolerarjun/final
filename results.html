@@ -147,7 +147,7 @@
                     data['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`);
                 } colorAssn.push(data);
                 document.body.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));
-                Plotly.newPlot(`res${j}`,colorAssn[j],layout);j++;
+                Plotly.newPlot(`res${j}`,[colorAssn[j]],layout);j++;
                 document.body.appendChild(document.createElement('br'));
             }
 
