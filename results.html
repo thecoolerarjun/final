@@ -186,7 +186,7 @@
                     update['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
                 } colorAssn.push(update);
                 Plotly.restyle(`res${j}`,colorAssn[j]);j++;
-            } //Plotly.restyle('scatter',colorAssn);
+            } for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);
         }
     </script>
 </body>
