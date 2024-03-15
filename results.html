@@ -28,6 +28,16 @@
     </fieldset>
     <button type="button" id="relattr">Reload Attributes</button>
 
+    <div id="fields">
+        <button type="button" id="addField">Add Field</button>
+        <fieldset>
+            <button type="button" id="addField0">Add Field</button>
+            <legend>Enter a label:</legend>
+            <input class="label0"/>
+            <br>
+        </fieldset>
+    </div>
+
     <!-- <div id="scatter"></div> -->
 
     <script type="module">
@@ -60,6 +70,7 @@
                 window.userData = snapshot.val().users;
                 helper(window.userData);
                 document.body.querySelector("#relattr").addEventListener('click', () => relattr(window.userData));
+                document.body.querySelector("#addField").addEventListener('click', () => addField());
             } else {
                 console.log("No data available");
             }
@@ -147,6 +158,10 @@
                 document.body.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));
                 Plotly.newPlot(`res${j}`,[colorAssn[j]],layout);j++;
                 document.body.appendChild(document.createElement('br'));
+                document.getElementById(`res${j}`).labels = [];
+                for (gender in input[uid]['genders']) document.getElementById(`res${j}`).labels.push(gender);
+                for (race in input[uid]['races']) document.getElementById(`res${j}`).labels.push(race);
+                for (religion in input[uid]['religions']) document.getElementById(`res${j}`).labels.push(religion);
             } document.body.appendChild(Object.assign(document.createElement('h2'),{textContent:'All responses',align:'center'}));
             var scatter = document.createElement('div');
             scatter.id = 'scatter';
@@ -187,6 +202,18 @@
                 } colorAssn.push(update);
                 Plotly.restyle(`res${j}`,colorAssn[j]);j++;
             } for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);
+        }
+
+        function addField() {
+            var fieldsets = document.getElementsByTagName('fieldset');
+            var fields = document.getElementById('fields');
+
+            fields.appendChild(Object.assign(document.createElement('select'),{class:'junct'}));
+            var and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
+            var or = Object.assign(document.createElement('option'),{value:'or',textContent:'or'});
+            var selects = document.body.getElementsByClassName('class');
+            selects[selects.length-1].appendChild(and);
+            selects[selects.length-1].appendChild(or);
         }
     </script>
 </body>
