@@ -208,10 +208,10 @@
             var fieldsets = document.getElementsByTagName('fieldset');
             var fields = document.getElementById('fields');
 
-            fields.appendChild(Object.assign(document.createElement('select'),{class:'junct'}));
+            fields.appendChild(Object.assign(document.createElement('select'),{classList:'junct'}));
             var and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
             var or = Object.assign(document.createElement('option'),{value:'or',textContent:'or'});
-            var selects = document.body.getElementsByClassName('class');
+            var selects = document.body.getElementsByClassName('junct');
             selects[selects.length-1].appendChild(and);
             selects[selects.length-1].appendChild(or);
         }
