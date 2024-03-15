@@ -141,7 +141,7 @@
                     data['y'].push(lab['bstar']);
                     data['z'].push(lab['Lstar']);
 
-                    data['marker']['size'].push(8);
+                    data['marker']['size'].push(16);
                     data['marker']['color'].push(`rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`);
 
                     data['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`);
