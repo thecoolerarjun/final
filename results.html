@@ -156,12 +156,12 @@
                     data['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`);
                 } colorAssn.push(data);
                 document.body.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));
-                Plotly.newPlot(`res${j}`,[colorAssn[j]],layout);j++;
+                Plotly.newPlot(`res${j}`,[colorAssn[j]],layout);
                 document.body.appendChild(document.createElement('br'));
-                document.getElementById(`res${j-1}`).labels = [];
+                document.getElementById(`res${j}`).labels = [];
                 for (gender in input[uid]['genders']) document.getElementById(`res${j}`).labels.push(gender);
                 for (race in input[uid]['races']) document.getElementById(`res${j}`).labels.push(race);
-                for (religion in input[uid]['religions']) document.getElementById(`res${j}`).labels.push(religion);
+                for (religion in input[uid]['religions']) document.getElementById(`res${j}`).labels.push(religion);j++;
             } document.body.appendChild(Object.assign(document.createElement('h2'),{textContent:'All responses',align:'center'}));
             var scatter = document.createElement('div');
             scatter.id = 'scatter';
