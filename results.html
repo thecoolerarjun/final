@@ -32,9 +32,9 @@
         <button type="button" id="addField">Add Field</button>
         <fieldset>
             <legend>Enter a label:</legend>
-            <button type="button" id="addField0">Add Field</button>
+            <button type="button" id="addSub0">Add Subfield</button><button type="button" id="delField0">Delete Field</button>
             <br>
-            <input class="label0"/>
+            <input class="label0"/><button type="button" class="delSub0">Delete Subfield</button>
         </fieldset>
     </div>
 
@@ -217,13 +217,17 @@
 
             var fieldset = document.createElement('fieldset');
             var legend = Object.assign(document.createElement('legend'),{textContent:'Enter a label:'});
-            var button = Object.assign(document.createElement('button'),{type:'button',id:`addField${fieldsets.length}`,textContent:'Add Field'});
+            var addSub = Object.assign(document.createElement('button'),{type:'button',id:`addSub${fieldsets.length}`,textContent:'Add Subfield'});
+            var delField = Object.assign(document.createElement('button'),{type:'button',id:`delField${fieldsets.length}`,textContent:'Delete Field'});
             var field = Object.assign(document.createElement('input'),{classList:`label${fieldsets.length}`});
+            var delSub = Object.assign(document.createElement('button'),{type:'button',classList:`delSub${fieldsets.length}`,textContent:'Delete Subfield'});
 
             fieldset.appendChild(legend);
-            fieldset.appendChild(button);
+            fieldset.appendChild(addSub);
+            fieldset.appendChild(delField);
             fieldset.appendChild(document.createElement('br'));
             fieldset.appendChild(field);
+            fieldset.appendChild(delSub);
 
             fields.appendChild(fieldset);
         }
