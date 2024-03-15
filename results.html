@@ -176,8 +176,8 @@
                     if (showTemperature) hoverBuffer+=`<br>Temperature: ${ans['temperature']}`;
 
                     update = {
-                        'marker.color': `rgb(${255-ans['beauty']*showBeauty},${255-ans['health']*showHealth},${255-ans['temperature']*showTemperature})`,
-                        // hovertemplate: `<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer
+                        // 'marker.color': `rgb(${255-ans['beauty']*showBeauty},${255-ans['health']*showHealth},${255-ans['temperature']*showTemperature})`,
+                        hovertemplate: `<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer
                     }
                     colorAssn.push(update);
                     responses[j].push(update);
