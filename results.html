@@ -206,6 +206,7 @@
 
         function addField() {
             var fields = document.getElementById('fields');
+            var fieldsets = fields.getElementsByTagName('fieldset');
 
             fields.appendChild(Object.assign(document.createElement('select'),{classList:'junct'}));
             var and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
@@ -216,8 +217,8 @@
 
             var fieldset = document.createElement('fieldset');
             var legend = Object.assign(document.createElement('legend'),{textContent:'Enter a label:'});
-            var button = Object.assign(document.createElement('button'),{type:'button',id:`addField${fieldset.length}`,textContent:'Add Field'});
-            var field = Object.assign(document.createElement('input'),{classList:`label${fieldset.length}`});
+            var button = Object.assign(document.createElement('button'),{type:'button',id:`addField${fieldsets.length}`,textContent:'Add Field'});
+            var field = Object.assign(document.createElement('input'),{classList:`label${fieldsets.length}`});
 
             fieldset.appendChild(legend);
             fieldset.appendChild(button);
