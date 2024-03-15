@@ -31,10 +31,10 @@
     <div id="fields">
         <button type="button" id="addField">Add Field</button>
         <fieldset>
-            <button type="button" id="addField0">Add Field</button>
             <legend>Enter a label:</legend>
-            <input class="label0"/>
+            <button type="button" id="addField0">Add Field</button>
             <br>
+            <input class="label0"/>
         </fieldset>
     </div>
 
@@ -205,7 +205,6 @@
         }
 
         function addField() {
-            var fieldsets = document.getElementsByTagName('fieldset');
             var fields = document.getElementById('fields');
 
             fields.appendChild(Object.assign(document.createElement('select'),{classList:'junct'}));
@@ -214,6 +213,18 @@
             var selects = document.body.getElementsByClassName('junct');
             selects[selects.length-1].appendChild(and);
             selects[selects.length-1].appendChild(or);
+
+            var fieldset = document.createElement('fieldset');
+            var legend = Object.assign(document.createElement('legend'),{textContent:'Enter a label:'});
+            var button = Object.assign(document.createElement('button'),{type:'button',id:`addField${fieldset.length}`,textContent:'Add Field'});
+            var field = Object.assign(document.createElement('input'),{classList:`label${fieldset.length}`});
+
+            fieldset.appendChild(legend);
+            fieldset.appendChild(button);
+            fieldset.appendChild(document.createElement('br'));
+            fieldset.appendChild(field);
+
+            fields.appendChild(fieldset);
         }
     </script>
 </body>
