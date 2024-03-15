@@ -181,10 +181,10 @@
                         },
                         hovertemplate: `<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer
                     }
-                    Plotly.restyle(`res${j}`,update,j);
-                    Plotly.restyle('scatter',update,j);
-                } j++;
-            }
+                    colorAssn.push(update);
+                    responses[j].push(update);
+                } Plotly.restyle(`res${j}`,responses[j],[0,Object.keys(input[uid]['test']['answers']).length-1]);j++;
+            } //Plotly.restyle('scatter',colorAssn,[0,Object.keys(input).length-1]);
         }
     </script>
 </body>
