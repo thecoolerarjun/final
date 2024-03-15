@@ -183,7 +183,7 @@
                     }
                     colorAssn.push(update);
                     responses[j].push(update);
-                } Plotly.restyle(`res${j}`,responses[j],[0,Object.keys(input[uid]['test']['answers']).length-1]);j++;
+                } Plotly.restyle(`res${j}`,responses[j],[0,Object.keys(input).length-1]);j++;
             } //Plotly.restyle('scatter',colorAssn,[0,Object.keys(input).length-1]);
         }
     </script>
