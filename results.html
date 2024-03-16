@@ -230,7 +230,7 @@
                 select.remove();
             }
             addSub.onclick = function() {
-                fieldset.select = fields.appendChild(Object.assign(document.createElement('select'),{classList:`junct${fieldset.i}`}));
+                fieldset.select = fieldset.appendChild(Object.assign(document.createElement('select'),{classList:`junct${fieldset.i}`}));
                 fieldset.and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
                 fieldset.or = Object.assign(document.createElement('option'),{value:'or',textContent:'or'});
                 select.appendChild(and);
