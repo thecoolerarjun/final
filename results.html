@@ -223,10 +223,12 @@
             delSub.onclick = function() {
                 if (fieldset.getElementsByTagName('div') != null) {
                     fieldset.getElementsByTagName('select')[0].remove();
+                    delSub = fieldset.getElementsByTagName('button')[0];
+                    field = fieldset.getElementsByTagName('input')[0];
+                } else {
+                    field.remove();
+                    delSub.remove();
                 }
-                field.remove();
-                delSub.remove();
-                field = fieldset.getElementsByTagName('input')[0];
             }
             delField.onclick = function() {
                 fieldset.remove();
