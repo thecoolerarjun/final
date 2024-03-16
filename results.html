@@ -26,6 +26,13 @@
         <input type="checkbox" class="attr">Temperature</input>
         <br>
     </fieldset>
+    <fieldset>
+        <select id="colorscheme">
+            <option value="cmy">CMY</option>
+            <option value="rgb">RGB</option>
+            <option value="bw">Black and white</option>
+        </select>
+    </fieldset>
     <button type="button" id="relattr">Reload Attributes</button>
 
     <!-- <div id="fields">
@@ -70,7 +77,7 @@
                 window.userData = snapshot.val().users;
                 helper(window.userData);
                 document.body.querySelector("#relattr").addEventListener('click', () => relattr(window.userData));
-                document.body.querySelector("#addField").addEventListener('click', () => addField());
+                // document.body.querySelector("#addField").addEventListener('click', () => addField());
             } else {
                 console.log("No data available");
             }
@@ -180,6 +187,8 @@
             var colorAssn = [];
             var update;
             var hoverBuffer;
+            var avg;
+            var colorscheme = document.getElementById('colorscheme').value;
 
             for (uid in input) {
                 update = {
@@ -197,7 +206,12 @@
                     if (showHealth) hoverBuffer+=`<br>Health: ${ans['health']}`;
                     if (showTemperature) hoverBuffer+=`<br>Temperature: ${ans['temperature']}`;
 
-                    update['marker']['color'].push(`rgb(${255-ans['beauty']*showBeauty},${255-ans['health']*showHealth},${255-ans['temperature']*showTemperature})`);
+                    avg = 255;
+                    if (showBeauty || showHealth || showTemperature) {
+                        avg = ((255-ans['beauty'])*showBeauty+(255-ans['health'])*showHealth+(255-ans['temperature'])*showTemperature)/(showBeauty+showHealth+showTemperature);
+                    }
+                    
+                    update['marker']['color'].push(`rgb(${ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')})`);
                     update['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
                 } colorAssn.push(update);
                 Plotly.restyle(`res${j}`,colorAssn[j]);j++;
