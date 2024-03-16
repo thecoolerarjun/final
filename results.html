@@ -230,22 +230,19 @@
                 select.remove();
             }
             addSub.onclick = function() {
-                fieldset.appendChild(document.createElement('br'));
-                fieldset.select = fieldset.appendChild(Object.assign(document.createElement('select'),{classList:`junct${fieldset.i}`}));
-                fieldset.and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
-                fieldset.or = Object.assign(document.createElement('option'),{value:'or',textContent:'or'});
-                (fieldset.select).appendChild(fieldset.and);
-                (fieldset.select).appendChild(fieldset.or);
-                fieldset.appendChild(document.createElement('br'));
-                fieldset.field = Object.assign(document.createElement('input'),{classList:`label${fieldset.i}`});
-                fieldset.delSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
+                var sub = fieldset.appendChild('div');
+                sub.appendChild(document.createElement('br'));
+                var subSelect = sub.appendChild(Object.assign(document.createElement('select'),{classList:`junct${fieldset.i}`}));
+                subSelect.appendChild(Object.assign(document.createElement('option'),{value:'and',textContent:'and'}));
+                subSelect.appendChild(Object.assign(document.createElement('option'),{value:'or',textContent:'or'}));
+                sub.appendChild(document.createElement('br'));
+                var subField = Object.assign(document.createElement('input'),{classList:`label${fieldset.i}`});
+                var subDelSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
                 (fieldset.delSub).onclick = function() {
-                    (fieldset.select).remove();
-                    (fieldset.field).remove();
-                    (fieldset.delSub).remove();
+                    sub.remove();
                 }
-                fieldset.appendChild(fieldset.field);
-                fieldset.appendChild(fieldset.delSub);
+                sub.appendChild(subField);
+                sub.appendChild(subDelSub);
             }
 
             fieldset.appendChild(legend);
