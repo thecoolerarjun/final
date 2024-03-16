@@ -217,14 +217,32 @@
 
             var fieldset = document.createElement('fieldset');
             var legend = Object.assign(document.createElement('legend'),{textContent:'Enter a label:'});
-            var addSub = Object.assign(document.createElement('button'),{type:'button',id:`addSub${fieldsets.length}`,textContent:'Add Subfield'});
-            var delField = Object.assign(document.createElement('button'),{type:'button',id:`delField${fieldsets.length}`,textContent:'Delete Field'});
+            var addSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Add Subfield'});
+            var delField = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Field'});
             var field = Object.assign(document.createElement('input'),{classList:`label${fieldsets.length}`});
-            var delSub = Object.assign(document.createElement('button'),{type:'button',classList:`delSub${fieldsets.length}`,textContent:'Delete Subfield'});
+            var delSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
             delSub.onclick = function() {
-		field.remove();
-		delSub.remove();
-	    }
+                field.remove();
+                delSub.remove();
+            }
+            delField.onclick = function() {
+                fieldset.remove();
+                selects[selects.length-1].remove();
+            }
+            addSub.onclick = function() {
+                fieldset.appendChild(Object.assign(document.createElement('select'),{classList:`junct${fieldsets.length}`}));
+                fieldset.and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
+                fieldset.or = Object.assign(document.createElement('option'),{value:'or',textContent:'or'});
+                fieldset.selects = fieldset.getElementsByClassName(`junct${fieldsets.length}`);
+                fieldset.selects[fieldset.selects.length-1].appendChild(and);
+                fieldset.selects[fieldset.selects.length-1].appendChild(or);
+                fieldset.field = Object.assign(document.createElement('input'),{classList:`label${fieldsets.length}`});
+                fieldset.delSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
+                fieldset.delSub.onclick = function() {
+                    fieldset.field.remove();
+                    fieldset.delSub.remove();
+                }
+            }
 
             fieldset.appendChild(legend);
             fieldset.appendChild(addSub);
