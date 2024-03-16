@@ -221,6 +221,7 @@
             var delField = Object.assign(document.createElement('button'),{type:'button',id:`delField${fieldsets.length}`,textContent:'Delete Field'});
             var field = Object.assign(document.createElement('input'),{classList:`label${fieldsets.length}`});
             var delSub = Object.assign(document.createElement('button'),{type:'button',classList:`delSub${fieldsets.length}`,textContent:'Delete Subfield'});
+            
 
             fieldset.appendChild(legend);
             fieldset.appendChild(addSub);
@@ -231,6 +232,7 @@
 
             fields.appendChild(fieldset);
         }
+        
     </script>
 </body>
 </html>
