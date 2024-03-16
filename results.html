@@ -226,6 +226,7 @@
                 }
                 field.remove();
                 delSub.remove();
+                field = fieldset.getElementsByTagName('input')[0];
             }
             delField.onclick = function() {
                 fieldset.remove();
@@ -240,9 +241,6 @@
                 var subField = sub.appendChild(Object.assign(document.createElement('input'),{classList:'label'}));
                 var subDelSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
                 subDelSub.onclick = function() {
-                    if (Array.prototype.slice.call(fieldset).indexOf(sub) == 0) {
-                        fieldset.getElementsByTagName('select')[0].remove();
-                    }
                     sub.remove();
                 }
                 sub.appendChild(subDelSub);
