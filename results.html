@@ -233,8 +233,8 @@
                 fieldset.select = fieldset.appendChild(Object.assign(document.createElement('select'),{classList:`junct${fieldset.i}`}));
                 fieldset.and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
                 fieldset.or = Object.assign(document.createElement('option'),{value:'or',textContent:'or'});
-                select.appendChild(and);
-                select.appendChild(or);
+                select.appendChild(fieldset.and);
+                select.appendChild(fieldset.or);
                 fieldset.field = Object.assign(document.createElement('input'),{classList:`label${fieldset.i}`});
                 fieldset.delSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
                 fieldset.delSub.onclick = function() {
