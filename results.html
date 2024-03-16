@@ -218,10 +218,12 @@
             var legend = Object.assign(document.createElement('legend'),{textContent:'Enter a label:'});
             var addSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Add Subfield'});
             var delField = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Field'});
-            var field = Object.assign(document.createElement('input'),{classList:`label${fieldsets.length}`});
+            var field = Object.assign(document.createElement('input'),{classList:'label'});
             var delSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
-            fieldset.i = fieldsets.length;
             delSub.onclick = function() {
+                if (fieldset.getElementsByTagName('div') != null) {
+                    fieldset.getElementsByTagName('select')[0].remove();
+                }
                 field.remove();
                 delSub.remove();
             }
@@ -231,11 +233,11 @@
             }
             addSub.onclick = function() {
                 var sub = fieldset.appendChild(document.createElement('div'));
-                var subSelect = sub.appendChild(Object.assign(document.createElement('select'),{classList:`junct${fieldset.i}`}));
+                var subSelect = sub.appendChild(Object.assign(document.createElement('select'),{classList:'junct'}));
                 subSelect.appendChild(Object.assign(document.createElement('option'),{value:'and',textContent:'and'}));
                 subSelect.appendChild(Object.assign(document.createElement('option'),{value:'or',textContent:'or'}));
                 sub.appendChild(document.createElement('br'));
-                var subField = sub.appendChild(Object.assign(document.createElement('input'),{classList:`label${fieldset.i}`}));
+                var subField = sub.appendChild(Object.assign(document.createElement('input'),{classList:'label'}));
                 var subDelSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
                 subDelSub.onclick = function() {
                     sub.remove();
