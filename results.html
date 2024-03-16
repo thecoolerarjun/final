@@ -238,7 +238,7 @@
                 sub.appendChild(document.createElement('br'));
                 var subField = Object.assign(document.createElement('input'),{classList:`label${fieldset.i}`});
                 var subDelSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
-                (fieldset.delSub).onclick = function() {
+                subDelSub.onclick = function() {
                     sub.remove();
                 }
                 sub.appendChild(subField);
