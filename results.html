@@ -230,6 +230,7 @@
                 select.remove();
             }
             addSub.onclick = function() {
+                fieldset.appendChild(document.createElement('br'));
                 fieldset.select = fieldset.appendChild(Object.assign(document.createElement('select'),{classList:`junct${fieldset.i}`}));
                 fieldset.and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
                 fieldset.or = Object.assign(document.createElement('option'),{value:'or',textContent:'or'});
@@ -238,10 +239,9 @@
                 fieldset.field = Object.assign(document.createElement('input'),{classList:`label${fieldset.i}`});
                 fieldset.delSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
                 fieldset.delSub.onclick = function() {
-                    fieldset.field.remove();
-                    fieldset.delSub.remove();
+                    (fieldset.field).remove();
+                    (fieldset.delSub).remove();
                 }
-                fieldset.appendChild(document.createElement('br'));
                 fieldset.appendChild(fieldset.field);
                 fieldset.appendChild(fieldset.delSub);
             }
