@@ -204,58 +204,58 @@
             } for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);
         }
 
-        function addField() {
-            var fields = document.getElementById('fields');
-            var fieldsets = fields.getElementsByTagName('fieldset');
+        // function addField() {
+        //     var fields = document.getElementById('fields');
+        //     var fieldsets = fields.getElementsByTagName('fieldset');
 
-            var select = fields.appendChild(Object.assign(document.createElement('select'),{classList:'junct'}));
-            var and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
-            var or = Object.assign(document.createElement('option'),{value:'or',textContent:'or'});
-            select.appendChild(and);
-            select.appendChild(or);
+        //     var select = fields.appendChild(Object.assign(document.createElement('select'),{classList:'junct'}));
+        //     var and = Object.assign(document.createElement('option'),{value:'and',textContent:'and'});
+        //     var or = Object.assign(document.createElement('option'),{value:'or',textContent:'or'});
+        //     select.appendChild(and);
+        //     select.appendChild(or);
 
-            var fieldset = document.createElement('fieldset');
-            var legend = Object.assign(document.createElement('legend'),{textContent:'Enter a label:'});
-            var addSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Add Subfield'});
-            var delField = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Field'});
-            var field = Object.assign(document.createElement('input'),{classList:'label'});
-            var delSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
-            delSub.onclick = function() {
-                field.remove();
-                delSub.remove();
-                if (fieldset.getElementsByTagName('div') != null) {
-                    fieldset.getElementsByTagName('select')[0].remove();
-                    delSub = fieldset.getElementsByTagName('button')[0];
-                    field = fieldset.getElementsByTagName('input')[0];
-                }
-            }
-            delField.onclick = function() {
-                fieldset.remove();
-                select.remove();
-            }
-            addSub.onclick = function() {
-                var sub = fieldset.appendChild(document.createElement('div'));
-                var subSelect = sub.appendChild(Object.assign(document.createElement('select'),{classList:'junct'}));
-                subSelect.appendChild(Object.assign(document.createElement('option'),{value:'and',textContent:'and'}));
-                subSelect.appendChild(Object.assign(document.createElement('option'),{value:'or',textContent:'or'}));
-                sub.appendChild(document.createElement('br'));
-                var subField = sub.appendChild(Object.assign(document.createElement('input'),{classList:'label'}));
-                var subDelSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
-                subDelSub.onclick = function() {
-                    sub.remove();
-                }
-                sub.appendChild(subDelSub);
-            }
+        //     var fieldset = document.createElement('fieldset');
+        //     var legend = Object.assign(document.createElement('legend'),{textContent:'Enter a label:'});
+        //     var addSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Add Subfield'});
+        //     var delField = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Field'});
+        //     var field = Object.assign(document.createElement('input'),{classList:'label'});
+        //     var delSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
+        //     delSub.onclick = function() {
+        //         field.remove();
+        //         delSub.remove();
+        //         if (fieldset.getElementsByTagName('div') != null) {
+        //             fieldset.getElementsByTagName('select')[0].remove();
+        //             delSub = fieldset.getElementsByTagName('button')[0];
+        //             field = fieldset.getElementsByTagName('input')[0];
+        //         }
+        //     }
+        //     delField.onclick = function() {
+        //         fieldset.remove();
+        //         select.remove();
+        //     }
+        //     addSub.onclick = function() {
+        //         var sub = fieldset.appendChild(document.createElement('div'));
+        //         var subSelect = sub.appendChild(Object.assign(document.createElement('select'),{classList:'junct'}));
+        //         subSelect.appendChild(Object.assign(document.createElement('option'),{value:'and',textContent:'and'}));
+        //         subSelect.appendChild(Object.assign(document.createElement('option'),{value:'or',textContent:'or'}));
+        //         sub.appendChild(document.createElement('br'));
+        //         var subField = sub.appendChild(Object.assign(document.createElement('input'),{classList:'label'}));
+        //         var subDelSub = Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Subfield'});
+        //         subDelSub.onclick = function() {
+        //             sub.remove();
+        //         }
+        //         sub.appendChild(subDelSub);
+        //     }
 
-            fieldset.appendChild(legend);
-            fieldset.appendChild(addSub);
-            fieldset.appendChild(delField);
-            fieldset.appendChild(document.createElement('br'));
-            fieldset.appendChild(field);
-            fieldset.appendChild(delSub);
+        //     fieldset.appendChild(legend);
+        //     fieldset.appendChild(addSub);
+        //     fieldset.appendChild(delField);
+        //     fieldset.appendChild(document.createElement('br'));
+        //     fieldset.appendChild(field);
+        //     fieldset.appendChild(delSub);
 
-            fields.appendChild(fieldset);
-        }
+        //     fields.appendChild(fieldset);
+        // }
         
     </script>
 </body>
