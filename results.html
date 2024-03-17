@@ -103,7 +103,7 @@
 
             var colorAssn = [];
 
-            window.prevLayout = {
+            window.labLayout = {
                 scene: {
                     xaxis: {
                         range: [-160,160],
@@ -128,6 +128,26 @@
                     }
                 }
             }
+            window.prevLayout = window.labLayout;
+            window.bhtLayout = {
+                scene: {
+                    xaxis: {
+                        title: {
+                            text: 'Beauty'
+                        }
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'Health'
+                        }
+                    },
+                    zaxis: {
+                        title: {
+                            text: 'Temperature'
+                        }
+                    }
+                }
+            };
             var layout = {
                 width: 500,
                 height: 500,
@@ -223,51 +243,7 @@
             var avg;
             var colorscheme = document.getElementById('colorscheme').value;
             var colors;
-            var updateLayout = {
-                scene: {
-                    xaxis: {
-                        title: {
-                            text: 'Beauty'
-                        }
-                    },
-                    yaxis: {
-                        title: {
-                            text: 'Health'
-                        }
-                    },
-                    zaxis: {
-                        title: {
-                            text: 'Temperature'
-                        }
-                    }
-                }
-            };
             var axes = document.getElementById('axes').value;
-            var oldLayout = {
-                scene: {
-                    xaxis: {
-                        range: [-160,160],
-                        nticks: 32,
-                        title: {
-                            text: 'a*'
-                        }
-                    },
-                    yaxis: {
-                        range: [-160,160],
-                        nticks: 32,
-                        title: {
-                            text: 'b*'
-                        }
-                    },
-                    zaxis: {
-                        range: [0,100],
-                        nticks: 10,
-                        title: {
-                            text: 'L*'
-                        }
-                    }
-                }
-            }
 
             for (uid in input) {
                 update = {
@@ -276,7 +252,7 @@
                     },
                     // hovertemplate: []
                 }
-                if ((axes == 'bht' && window.prevLayout == oldLayout) || (axes == 'lab' && window.prevLayout == updateLayout)) {
+                if ((axes == 'bht' && window.prevLayout == window.labLayout) || (axes == 'lab' && window.prevLayout == window.bhtLayout)) {
                     update['x'] = [];
                     update['y'] = [];
                     update['z'] = [];
@@ -297,15 +273,15 @@
 
                     colors = [ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw'),ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw'),ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')];
 
-                    if (axes == 'lab' && window.prevLayout == updateLayout) {
+                    if (axes == 'lab' && window.prevLayout == window.bhtLayout) {
                         update['marker']['color'].push(`rgb(${ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')})`);
                         update['x'].push(lab['astar']);update['y'].push(lab['bstar']);update['z'].push(lab['Lstar']);
-                        window.prevLayout = oldLayout;
+                        window.prevLayout = window.labLayout;
                     }
-                    if (axes == 'bht' && window.prevLayout == oldLayout) {
+                    if (axes == 'bht' && window.prevLayout == window.labLayout) {
                         update['marker']['color'].push(d3.lab(lab['Lstar'],lab['astar'],lab['bstar']).formatRgb());
                         update['x'].push(ans['beauty']);update['y'].push(ans['health']);update['z'].push(ans['temperature']);
-                        window.prevLayout = updateLayout;
+                        window.prevLayout = window.bhtLayout;
                     }
                     // update['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
                 } colorAssn.push(update);
