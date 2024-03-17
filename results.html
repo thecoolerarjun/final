@@ -190,9 +190,11 @@
             var hoverBuffer;
             var avg;
             var colorscheme = document.getElementById('colorscheme').value;
+            var colors;
 
             for (uid in input) {
                 update = {
+                    x:[],y:[],z:[],
                     marker: {
                         color: []
                     },
@@ -202,17 +204,21 @@
                     ans = input[uid]['test']['answers'][i];
                     lab = input[uid]['test']['colors'][i];
 
-                    hoverBuffer = '';
-                    if (showBeauty) hoverBuffer+=`<br>Beauty: ${ans['beauty']}`;
-                    if (showHealth) hoverBuffer+=`<br>Health: ${ans['health']}`;
-                    if (showTemperature) hoverBuffer+=`<br>Temperature: ${ans['temperature']}`;
+                    // hoverBuffer = '';
+                    // if (showBeauty) hoverBuffer+=`<br>Beauty: ${ans['beauty']}`;
+                    // if (showHealth) hoverBuffer+=`<br>Health: ${ans['health']}`;
+                    // if (showTemperature) hoverBuffer+=`<br>Temperature: ${ans['temperature']}`;
 
                     avg = 255;
                     if (showBeauty || showHealth || showTemperature) {
                         avg = ((255-ans['beauty'])*showBeauty+(255-ans['health'])*showHealth+(255-ans['temperature'])*showTemperature)/(showBeauty+showHealth+showTemperature);
                     }
-                    
+
+                    colors = [ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw'),ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw'),ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')];
+
                     update['marker']['color'].push(`rgb(${ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')})`);
+                    // update['marker']['color'].push(d3.lab(lab['Lstar'],lab['astar'],lab['bstar']).formatRgb());
+                    console.log(d3.lab(lab['Lstar'],lab['astar'],lab['bstar']).formatRgb());
                     // update['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
                 } colorAssn.push(update);
                 Plotly.restyle(`res${j}`,colorAssn[j]);j++;
