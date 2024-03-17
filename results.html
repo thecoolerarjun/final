@@ -261,9 +261,9 @@
             // var axes = document.getElementById('axes').value;
             var fields = document.getElementsByClassName('field');
             var juncts = document.getElementsByClassName('junct');
-            var statement = `(genders.some(str=>str.includes(${fields[0].value}))||races.some(str=>str.includes(${fields[0].value}))||religions.some(str=>str.includes(${fields[0].value})))`;
+            var statement = `(genders.some(str=>str.includes('${fields[0].value}'))||races.some(str=>str.includes('${fields[0].value}'))||religions.some(str=>str.includes('${fields[0].value}')))`;
             for (var i=1; i < fields.length; i++) {
-                statement += `${juncts[i-1].value}(genders.some(str=>str.includes(${fields[i].value}))||race.some(str=>str.includes(${fields[i].value}))||religions.some(str=>str.includes(${fields[i].value})))`;
+                statement += `${juncts[i-1].value}(genders.some(str=>str.includes('${fields[i].value}'))||race.some(str=>str.includes('${fields[i].value}'))||religions.some(str=>str.includes('${fields[i].value}')))`;
             }
             var genders;
             var races;
@@ -375,7 +375,7 @@
             var dis = junction.appendChild(Object.assign(document.createElement('option'),{value:'||',textContent:'or'}));
             div.appendChild(document.createElement('br'));
             var field = div.appendChild(Object.assign(document.createElement('input'),{classList:'field'}));
-            var delField = div.appendChild(Object.assign(document.createElement('button')),{type:'button'});
+            var delField = div.appendChild(Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Field'}));
             delField.onclick = function() { div.remove() };
         }
     </script>
