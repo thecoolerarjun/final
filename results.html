@@ -19,11 +19,11 @@
     </div>
     <fieldset>
         <legend>Select attributes to include:</legend>
-        <input type="checkbox" class="attr">Beauty</input>
+        <input type="checkbox" class="attr" checked="true">Beauty</input>
         <br>
-        <input type="checkbox" class="attr">Health</input>
+        <input type="checkbox" class="attr" checked="true">Health</input>
         <br>
-        <input type="checkbox" class="attr">Temperature</input>
+        <input type="checkbox" class="attr" checked="true">Temperature</input>
         <br>
     </fieldset>
     <fieldset>
@@ -132,16 +132,22 @@
             window.bhtLayout = {
                 scene: {
                     xaxis: {
+                        range: [0,255],
+                        nticks: 15,
                         title: {
                             text: 'Beauty'
                         }
                     },
                     yaxis: {
+                        range: [0,255],
+                        nticks: 15,
                         title: {
                             text: 'Health'
                         }
                     },
                     zaxis: {
+                        range: [0,255],
+                        nticks: 15,
                         title: {
                             text: 'Temperature'
                         }
