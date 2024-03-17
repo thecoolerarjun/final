@@ -128,7 +128,39 @@
                     }
                 }
             }
-            var layout = Object.assign(this,window.prevLayout);layout['width']=500;layout['height']=500;layout['margin']={};layout['margin']['l']=0;layout['margin']['r']=0;layout['margin']['b']=0;layout['margin']['t']=0;
+            var layout = {
+                width: 500,
+                height: 500,
+                margin: {
+                    l: 0,
+                    r: 0,
+                    b: 0,
+                    t: 0
+                },
+                scene: {
+                    xaxis: {
+                        range: [-160,160],
+                        nticks: 32,
+                        title: {
+                            text: 'a*'
+                        }
+                    },
+                    yaxis: {
+                        range: [-160,160],
+                        nticks: 32,
+                        title: {
+                            text: 'b*'
+                        }
+                    },
+                    zaxis: {
+                        range: [0,100],
+                        nticks: 10,
+                        title: {
+                            text: 'L*'
+                        }
+                    }
+                }
+            };
             var name;
             var h2;
 
