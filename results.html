@@ -34,13 +34,13 @@
             <option value="bw">Black and white</option>
         </select>
     </fieldset>
-    <!-- <fieldset>
+    <fieldset>
         <legend>Select axes:</legend>
         <select id="axes">
             <option value="lab">L*a*b*</option>
             <option value="bht">Beauty, Health, Temperature</option>
         </select>
-    </fieldset> -->
+    </fieldset>
     <fieldset>
         <legend>Filter by additional attributes:</legend>
         <div id="fields">
@@ -108,9 +108,11 @@
             var ans;
             var lab;
             var data;
+            var swappedAxesData;
             var j = 0;
 
             var colorAssn = [];
+            var swappedAxesColorAssn = [];
 
             // window.labLayout = {
             //     scene: {
@@ -138,31 +140,6 @@
             //     }
             // }
             // window.prevLayout = window.labLayout;
-            // window.bhtLayout = {
-            //     scene: {
-            //         xaxis: {
-            //             range: [0,255],
-            //             nticks: 15,
-            //             title: {
-            //                 text: 'Beauty'
-            //             }
-            //         },
-            //         yaxis: {
-            //             range: [0,255],
-            //             nticks: 15,
-            //             title: {
-            //                 text: 'Health'
-            //             }
-            //         },
-            //         zaxis: {
-            //             range: [0,255],
-            //             nticks: 15,
-            //             title: {
-            //                 text: 'Temperature'
-            //             }
-            //         }
-            //     }
-            // };
             var layout = {
                 width: 500,
                 height: 500,
@@ -196,9 +173,34 @@
                     }
                 }
             };
+            var swappedAxesLayout = {
+                scene: {
+                    xaxis: {
+                        range: [0,255],
+                        nticks: 15,
+                        title: {
+                            text: 'Beauty'
+                        }
+                    },
+                    yaxis: {
+                        range: [0,255],
+                        nticks: 15,
+                        title: {
+                            text: 'Health'
+                        }
+                    },
+                    zaxis: {
+                        range: [0,255],
+                        nticks: 15,
+                        title: {
+                            text: 'Temperature'
+                        }
+                    }
+                }
+            };
             var name;
-            var h2;
             var graphField;
+            var swappedAxesGraphField;
 
             for (uid in input) {
                 // name = input[uid]['name'].toUpperCase();
@@ -217,8 +219,22 @@
                     name: `${name}'s responses`,
                     hovertemplate: []
                 }
-                graphField = document.body.appendChild(Object.assign(document.createElement('fieldset'),{id:`graphField${j}`}));
-                h2 = graphField.appendChild(Object.assign(document.createElement('h2'),{textContent:`${name}'s responses`,align:'center'}));
+                swappedAxesData = {
+                    x:[],y:[],z:[],
+                    type: 'scatter3d',
+                    mode: 'markers',
+                    marker: {
+                        // symbol: 'circle',
+                        size: 8,
+                        opacity: 1,
+                        color: [],
+                        line: {}
+                    },
+                    name: `${name}'s questions`,
+                    hovertemplate: []
+                }
+                graphField = document.body.appendChild(Object.assign(document.createElement('fieldset'),{id:`graphField${j}`}));swappedAxesGraphField = document.body.appendChild(Object.assign(document.createElement('fieldset'),{id:`swappedAxesGraphField${j}`}));swappedAxesGraphField.style.display = 'none';
+                graphField.appendChild(Object.assign(document.createElement('h2'),{textContent:`${name}'s responses`,align:'center'}));swappedAxesGraphField.appendChild(Object.assign(document.createElement('h2'),{textContent:`${name}'s questions`,align:'center'}));
                 for (i in input[uid]['test']['answers']) {
                     ans = input[uid]['test']['answers'][i];
                     lab = input[uid]['test']['colors'][i];
@@ -226,26 +242,33 @@
                     data['x'].push(lab['astar']);
                     data['y'].push(lab['bstar']);
                     data['z'].push(lab['Lstar']);
+
+                    swappedAxesData['x'].push(ans['beauty']);
+                    swappedAxesData['y'].push(ans['health']);
+                    swappedAxesData['z'].push(ans['temperature']);
                     
                     data['marker']['color'].push(`rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`);
+                    swappedAxesData['marker']['color'].push(d3.lab(lab['Lstar'],lab['astar'],lab['bstar']).formatRgb());
 
                     data['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`);
-                } colorAssn.push(data);
-                graphField.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));
-                Plotly.newPlot(`res${j}`,[colorAssn[j]],layout);
-                graphField.appendChild(document.createElement('br'));
-                graphField.appendChild(Object.assign(document.createElement('h4'),{innerHTML:'Tags:'}));
-                graphField.appendChild(document.createElement('br'));
-                graphField.appendChild(Object.assign(document.createElement('p'),{innerHTML:`Gender and sexuality: ${input[uid]['genders']}`}));
-                graphField.appendChild(document.createElement('br'));
-                graphField.appendChild(Object.assign(document.createElement('p'),{innerHTML:`Race and ethnicity: ${input[uid]['races']}`}));
-                graphField.appendChild(document.createElement('br'));
-                graphField.appendChild(Object.assign(document.createElement('p'),{innerHTML:`Religion and spirituality: ${input[uid]['religions']}`}));j++;
+                    swappedAxesData['hovertemplate'].push(`Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}<br><i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`);
+                } colorAssn.push(data);swappedAxesColorAssn.push(swappedAxesData);
+                graphField.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));swappedAxesGraphField.appendChild(Object.assign(document.createElement('div'),{id:`swappedAxesRes${j}`}));
+                Plotly.newPlot(`res${j}`,[colorAssn[j]],layout);Plotly.newPlot(`swappedAxesRes${j}`,[swappedAxesColorAssn[j]],swappedAxesLayout);
+                graphField.appendChild(Object.assign(document.createElement('h4'),{innerHTML:'Tags:'}));swappedAxesGraphField.appendChild(Object.assign(document.createElement('h4'),{innerHTML:'Tags:'}));
+                graphField.appendChild(Object.assign(document.createElement('p'),{innerHTML:`Gender and sexuality: ${input[uid]['genders']}`}));swappedAxesGraphField.appendChild(Object.assign(document.createElement('p'),{innerHTML:`Gender and sexuality: ${input[uid]['genders']}`}));
+                graphField.appendChild(Object.assign(document.createElement('p'),{innerHTML:`Race and ethnicity: ${input[uid]['races']}`}));swappedAxesGraphField.appendChild(Object.assign(document.createElement('p'),{innerHTML:`Race and ethnicity: ${input[uid]['races']}`}));
+                graphField.appendChild(Object.assign(document.createElement('p'),{innerHTML:`Religion and spirituality: ${input[uid]['religions']}`}));swappedAxesGraphField.appendChild(Object.assign(document.createElement('p'),{innerHTML:`Religion and spirituality: ${input[uid]['religions']}`}));j++;
             } document.body.appendChild(Object.assign(document.createElement('h2'),{textContent:'All responses',align:'center'}));
             var scatter = document.createElement('div');
             scatter.id = 'scatter';
             document.body.appendChild(scatter);
             Plotly.newPlot('scatter',colorAssn,layout);
+            document.body.appendChild(Object.assign(document.createElement('h2'),{textContent:'All questions',align:'center'}));
+            var swappedAxesScatter = document.createElement('div');
+            swappedAxesScatter.id = 'swappedAxesScatter';
+            document.body.appendChild(swappedAxesScatter);
+            Plotly.newPlot('swappedAxesScatter',swappedAxesColorAssn,swappedAxesLayout);
         }
 
         function relattr(input) {
@@ -262,7 +285,7 @@
             var avg;
             var colorscheme = document.getElementById('colorscheme').value;
             var colors;
-            // var axes = document.getElementById('axes').value;
+            var axes = document.getElementById('axes').value;
             var fields = document.getElementsByClassName('field');
             var juncts = document.getElementsByClassName('junct');
             var statement = `(genders.some(str=>str.toLowerCase().includes('${fields[0].value}'.toLowerCase()))||races.some(str=>str.toLowerCase().includes('${fields[0].value}'.toLowerCase()))||religions.some(str=>str.toLowerCase().includes('${fields[0].value}'.toLowerCase())))`;
@@ -277,7 +300,9 @@
                 genders = Array.prototype.slice.call(input[uid]['genders']);
                 races = Array.prototype.slice.call(input[uid]['races']);
                 religions = Array.prototype.slice.call(input[uid]['religions']);
-                if (eval(statement)) document.getElementById(`graphField${j}`).style.display = 'block';else document.getElementById(`graphField${j}`).style.display = 'none';
+                if (axes == 'lab') { document.getElementById(`graphField${j}`).style.display = 'block';document.getElementById(`swappedAxesGraphField${j}`).style.display = 'none' };
+                if (axes == 'bht') { document.getElementById(`swappedAxesGraphField${j}`).style.display = 'block';document.getElementById(`graphField${j}`).style.display = 'none' };
+                if (eval(statement)) document.getElementById(`${eval("if (axes == 'lab') 'g'; else 'swappedAxesG'")}raphField${j}`).style.display = 'block';else document.getElementById(`${eval("if (axes == 'lab') 'g'; else 'swappedAxesG'")}raphField${j}`).style.display = 'none';
 
                 update = {
                     marker: {
