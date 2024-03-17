@@ -128,7 +128,7 @@
                     }
                 }
             }
-            var layout = window.prevLayout;layout['width']=500;layout['height']=500;layout['margin']={};layout['margin']['l']=0;layout['margin']['r']=0;layout['margin']['b']=0;layout['margin']['t']=0;
+            var layout = Object.assign(this,window.prevLayout);layout['width']=500;layout['height']=500;layout['margin']={};layout['margin']['l']=0;layout['margin']['r']=0;layout['margin']['b']=0;layout['margin']['t']=0;
             var name;
             var h2;
 
