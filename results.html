@@ -263,7 +263,7 @@
             var juncts = document.getElementsByClassName('junct');
             var statement = `(genders.some(str=>str.includes('${fields[0].value}'))||races.some(str=>str.includes('${fields[0].value}'))||religions.some(str=>str.includes('${fields[0].value}')))`;
             for (var i=1; i < fields.length; i++) {
-                statement += `${juncts[i-1].value}(genders.some(str=>str.includes('${fields[i].value}'))||race.some(str=>str.includes('${fields[i].value}'))||religions.some(str=>str.includes('${fields[i].value}')))`;
+                statement += `${juncts[i-1].value}(genders.some(str=>str.includes('${fields[i].value}'))||races.some(str=>str.includes('${fields[i].value}'))||religions.some(str=>str.includes('${fields[i].value}')))`;
             }
             var genders;
             var races;
