@@ -289,8 +289,8 @@
                     if (axes == 'bht') update['marker']['color'].push(d3.lab(lab['Lstar'],lab['astar'],lab['bstar']).formatRgb());
                     // update['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
                 } colorAssn.push(update);
-                Plotly.restyle(`res${j}`,colorAssn[j]);if (axes == 'lab' && window.prevLayout == window.bhtLayout) Plotly.relayout(`res${j}`,window.labLayout);if (axes == 'bht' && window.prevLayout == window.labLayout) Plotly.relayout(`res${j}`,window.bhtLayout);j++;
-            } if (axes == 'lab' && window.prevLayout == window.bhtLayout) window.prevLayout = window.labLayout;if (axes == 'bht' && window.prevLayout == window.labLayout) window.prevLayout = window.bhtLayout;for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);Plotly.relayout('scatter',window.prevLayout);
+                if (axes == 'lab' && window.prevLayout == window.bhtLayout) Plotly.relayout(`res${j}`,window.labLayout);if (axes == 'bht' && window.prevLayout == window.labLayout) Plotly.relayout(`res${j}`,window.bhtLayout);Plotly.restyle(`res${j}`,colorAssn[j]);j++;
+            } if (axes == 'lab' && window.prevLayout == window.bhtLayout) {window.prevLayout = window.labLayout;Plotly.relayout('scatter',window.prevLayout)};if (axes == 'bht' && window.prevLayout == window.labLayout) {window.prevLayout = window.bhtLayout;Plotly.relayout('scatter',window.prevLayout)};for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);
         }
 
         // function addField() {
