@@ -250,7 +250,7 @@
                     data['marker']['color'].push(`rgb(${255-ans['beauty']},${255-ans['health']},${255-ans['temperature']})`);
                     // swappedAxesData['marker']['color'].push(d3.lab(lab['Lstar'],lab['astar'],lab['bstar']).formatRgb());
 
-                    data['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`);
+                    data['hovertemplate'].push(`<b>Response ${i}</b><br><i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}<br>Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}`);
                     // swappedAxesData['hovertemplate'].push(`Beauty: ${ans['beauty']}<br>Health: ${ans['health']}<br>Temperature: ${ans['temperature']}<br><i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`);
                 } colorAssn.push(data);//swappedAxesColorAssn.push(swappedAxesData);
                 graphField.appendChild(Object.assign(document.createElement('div'),{id:`res${j}`}));//swappedAxesGraphField.appendChild(Object.assign(document.createElement('div'),{id:`swappedAxesRes${j}`}));
