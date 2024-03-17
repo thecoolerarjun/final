@@ -226,7 +226,11 @@
                     },
                     // hovertemplate: []
                 }
-                if (axes == 'bht') update.push({x:[],y:[],z:[]});
+                if (axes == 'bht') {
+                    update['x'] = [];
+                    update['y'] = [];
+                    update['z'] = [];
+                };
                 for (i in input[uid]['test']['answers']) {
                     ans = input[uid]['test']['answers'][i];
                     lab = input[uid]['test']['colors'][i];
