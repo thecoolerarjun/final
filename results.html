@@ -34,12 +34,20 @@
             <option value="bw">Black and white</option>
         </select>
     </fieldset>
-    <fieldset>
+    <!-- <fieldset>
         <legend>Select axes:</legend>
         <select id="axes">
             <option value="lab">L*a*b*</option>
             <option value="bht">Beauty, Health, Temperature</option>
         </select>
+    </fieldset> -->
+    <fieldset>
+        <legend>Filter by additional attributes:</legend>
+        <div id="fields">
+            <input class="field"/>
+        </div>
+        <button type="button" id="addField">Add Field</button>
+        <button type="button" id="clearAll">Clear All</button>
     </fieldset>
     <button type="button" id="relattr">Reload Attributes</button>
 
@@ -85,7 +93,8 @@
                 window.userData = snapshot.val().users;
                 helper(window.userData);
                 document.body.querySelector("#relattr").addEventListener('click', () => relattr(window.userData));
-                // document.body.querySelector("#addField").addEventListener('click', () => addField());
+                document.body.querySelector("#addField").addEventListener('click', () => addField());
+                document.body.querySelector("#clearAll").addEventListener('click', () => function() { for (field in document.getElementsByClassName('field')) field.value='' });
             } else {
                 console.log("No data available");
             }
@@ -103,57 +112,57 @@
 
             var colorAssn = [];
 
-            window.labLayout = {
-                scene: {
-                    xaxis: {
-                        range: [-160,160],
-                        nticks: 32,
-                        title: {
-                            text: 'a*'
-                        }
-                    },
-                    yaxis: {
-                        range: [-160,160],
-                        nticks: 32,
-                        title: {
-                            text: 'b*'
-                        }
-                    },
-                    zaxis: {
-                        range: [0,100],
-                        nticks: 10,
-                        title: {
-                            text: 'L*'
-                        }
-                    }
-                }
-            }
-            window.prevLayout = window.labLayout;
-            window.bhtLayout = {
-                scene: {
-                    xaxis: {
-                        range: [0,255],
-                        nticks: 15,
-                        title: {
-                            text: 'Beauty'
-                        }
-                    },
-                    yaxis: {
-                        range: [0,255],
-                        nticks: 15,
-                        title: {
-                            text: 'Health'
-                        }
-                    },
-                    zaxis: {
-                        range: [0,255],
-                        nticks: 15,
-                        title: {
-                            text: 'Temperature'
-                        }
-                    }
-                }
-            };
+            // window.labLayout = {
+            //     scene: {
+            //         xaxis: {
+            //             range: [-160,160],
+            //             nticks: 32,
+            //             title: {
+            //                 text: 'a*'
+            //             }
+            //         },
+            //         yaxis: {
+            //             range: [-160,160],
+            //             nticks: 32,
+            //             title: {
+            //                 text: 'b*'
+            //             }
+            //         },
+            //         zaxis: {
+            //             range: [0,100],
+            //             nticks: 10,
+            //             title: {
+            //                 text: 'L*'
+            //             }
+            //         }
+            //     }
+            // }
+            // window.prevLayout = window.labLayout;
+            // window.bhtLayout = {
+            //     scene: {
+            //         xaxis: {
+            //             range: [0,255],
+            //             nticks: 15,
+            //             title: {
+            //                 text: 'Beauty'
+            //             }
+            //         },
+            //         yaxis: {
+            //             range: [0,255],
+            //             nticks: 15,
+            //             title: {
+            //                 text: 'Health'
+            //             }
+            //         },
+            //         zaxis: {
+            //             range: [0,255],
+            //             nticks: 15,
+            //             title: {
+            //                 text: 'Temperature'
+            //             }
+            //         }
+            //     }
+            // };
             var layout = {
                 width: 500,
                 height: 500,
@@ -245,24 +254,38 @@
             var j = 0;
             var colorAssn = [];
             var update;
-            var hoverBuffer;
+            // var hoverBuffer;
             var avg;
             var colorscheme = document.getElementById('colorscheme').value;
             var colors;
-            var axes = document.getElementById('axes').value;
+            // var axes = document.getElementById('axes').value;
+            var fields = document.getElementsByClassName('field');
+            var juncts = document.getElementsByClassName('junct');
+            var statement = `(genders.some(str=>str.includes(${fields[0].value}))||race.some(str=>str.includes(${fields[0].value}))||religions.some(str=>str.includes(${fields[0].value})))`;
+            for (var i=1; i < fields.length; i++) {
+                statement += `${juncts[i-1].value}(genders.some(str=>str.includes(${fields[i].value}))||race.some(str=>str.includes(${fields[i].value}))||religions.some(str=>str.includes(${fields[i].value})))`;
+            }
+            var genders;
+            var races;
+            var religions;
 
             for (uid in input) {
+                genders = Array.prototype.slice.call(input[uid]['genders']);
+                races = Array.prototype.slice.call(input[uid]['races']);
+                religions = Array.prototype.slice.call(input[uid]['religions']);
+                if (eval(statement)) document.getElementById(`res${j}`).style.display = 'block';else document.getElementById(`res${j}`).style.display = 'none';
+
                 update = {
                     marker: {
                         color: []
                     },
                     // hovertemplate: []
                 }
-                if ((axes == 'bht' && window.prevLayout == window.labLayout) || (axes == 'lab' && window.prevLayout == window.bhtLayout)) {
-                    update['x'] = [];
-                    update['y'] = [];
-                    update['z'] = [];
-                };
+                // if ((axes == 'bht' && window.prevLayout == window.labLayout) || (axes == 'lab' && window.prevLayout == window.bhtLayout)) {
+                //     update['x'] = [];
+                //     update['y'] = [];
+                //     update['z'] = [];
+                // };
                 for (i in input[uid]['test']['answers']) {
                     ans = input[uid]['test']['answers'][i];
                     lab = input[uid]['test']['colors'][i];
@@ -277,20 +300,18 @@
                         avg = ((255-ans['beauty'])*showBeauty+(255-ans['health'])*showHealth+(255-ans['temperature'])*showTemperature)/(showBeauty+showHealth+showTemperature);
                     }
 
-                    colors = [ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw'),ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw'),ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')];
-
-                    if (axes == 'lab' && window.prevLayout == window.bhtLayout) {
-                        update['x'].push(lab['astar']);update['y'].push(lab['bstar']);update['z'].push(lab['Lstar']);
-                    }
-                    if (axes == 'bht' && window.prevLayout == window.labLayout) {
-                        update['x'].push(ans['beauty']);update['y'].push(ans['health']);update['z'].push(ans['temperature']);
-                    }
-                    if (axes == 'lab') update['marker']['color'].push(`rgb(${ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')})`);
-                    if (axes == 'bht') update['marker']['color'].push(d3.lab(lab['Lstar'],lab['astar'],lab['bstar']).formatRgb());
+                    // if (axes == 'lab' && window.prevLayout == window.bhtLayout) {
+                    //     update['x'].push(lab['astar']);update['y'].push(lab['bstar']);update['z'].push(lab['Lstar']);
+                    // }
+                    // if (axes == 'bht' && window.prevLayout == window.labLayout) {
+                    //     update['x'].push(ans['beauty']);update['y'].push(ans['health']);update['z'].push(ans['temperature']);
+                    // }
+                    /*if (axes == 'lab')*/ update['marker']['color'].push(`rgb(${ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')})`);
+                    // if (axes == 'bht') update['marker']['color'].push(d3.lab(lab['Lstar'],lab['astar'],lab['bstar']).formatRgb());
                     // update['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
                 } colorAssn.push(update);
-                if (axes == 'lab' && window.prevLayout == window.bhtLayout) Plotly.relayout(`res${j}`,window.labLayout);if (axes == 'bht' && window.prevLayout == window.labLayout) Plotly.relayout(`res${j}`,window.bhtLayout);Plotly.restyle(`res${j}`,colorAssn[j]);j++;
-            } if (axes == 'lab' && window.prevLayout == window.bhtLayout) {window.prevLayout = window.labLayout;Plotly.relayout('scatter',window.prevLayout)};if (axes == 'bht' && window.prevLayout == window.labLayout) {window.prevLayout = window.bhtLayout;Plotly.relayout('scatter',window.prevLayout)};for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);
+                /*if (axes == 'lab' && window.prevLayout == window.bhtLayout) Plotly.relayout(`res${j}`,window.labLayout);if (axes == 'bht' && window.prevLayout == window.labLayout) Plotly.relayout(`res${j}`,window.bhtLayout);*/Plotly.restyle(`res${j}`,colorAssn[j]);j++;
+            } /*if (axes == 'lab' && window.prevLayout == window.bhtLayout) {window.prevLayout = window.labLayout;Plotly.relayout('scatter',window.prevLayout)};if (axes == 'bht' && window.prevLayout == window.labLayout) {window.prevLayout = window.bhtLayout;Plotly.relayout('scatter',window.prevLayout)};*/for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);
         }
 
         // function addField() {
@@ -346,6 +367,17 @@
         //     fields.appendChild(fieldset);
         // }
         
+        function addField() {
+            var fields = document.getElementById('fields');
+            var div = fields.appendChild(Object.assign(document.createElement('div')));
+            var junction = div.appendChild(Object.assign(document.createElement('select'),{classList:'junct'}));
+            var con = junction.appendChild(Object.assign(document.createElement('option'),{value:'&&',textContent:'and'}));
+            var dis = junction.appendChild(Object.assign(document.createElement('option'),{value:'||',textContent:'or'}));
+            div.appendChild(document.createElement('br'));
+            var field = div.appendChild(Object.assign(document.createElement('input'),{classList:'field'}));
+            var delField = div.appendChild(Object.assign(document.createElement),{type:'button'});
+            delField.onclick = function() { div.remove() };
+        }
     </script>
 </body>
 </html>
