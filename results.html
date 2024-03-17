@@ -185,19 +185,16 @@
             var lab;
             var j = 0;
             var colorAssn = [];
-            var update1;
-            var update2;
+            var update;
             var hoverBuffer;
             var avg;
             var colorscheme = document.getElementById('colorscheme').value;
 
             for (uid in input) {
-                update1 = {
+                update = {
                     marker: {
                         color: []
-                    }
-                }
-                update2 = {
+                    },
                     hovertemplate: []
                 }
                 for (i in input[uid]['test']['answers']) {
@@ -214,10 +211,10 @@
                         avg = ((255-ans['beauty'])*showBeauty+(255-ans['health'])*showHealth+(255-ans['temperature'])*showTemperature)/(showBeauty+showHealth+showTemperature);
                     }
                     
-                    update1['marker']['color'].push(`rgb(${ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')})`);
-                    update2['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
-                } colorAssn.push([update1,update2]);
-                Plotly.restyle(`res${j}`,colorAssn[j][0]);Plotly.restyle(`res${j}`,colorAssn[j][1]);j++;
+                    update['marker']['color'].push(`rgb(${ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')})`);
+                    update['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
+                } colorAssn.push(update);
+                Plotly.restyle(`res${j}`,colorAssn[j]);j++;
             } for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);
         }
 
