@@ -265,18 +265,20 @@
 
                     colors = [ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw'),ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw'),ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')];
 
-                    if (axes == 'lab') {
+                    if (axes == 'lab' && window.prevLayout == updateLayout) {
                         update['marker']['color'].push(`rgb(${ans['beauty']*showBeauty*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['health']*showHealth*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')},${ans['temperature']*showTemperature*((colorscheme=='rgb')-(colorscheme=='cmy'))+255*(colorscheme=='cmy')+avg*(colorscheme=='bw')})`);
                         update['x'].push(lab['astar']);update['y'].push(lab['bstar']);update['z'].push(lab['Lstar']);
+                        window.prevLayout = oldLayout;
                     }
                     if (axes == 'bht' && window.prevLayout == oldLayout) {
                         update['marker']['color'].push(d3.lab(lab['Lstar'],lab['astar'],lab['bstar']).formatRgb());
                         update['x'].push(ans['beauty']);update['y'].push(ans['health']);update['z'].push(ans['temperature']);
+                        window.prevLayout = updateLayout;
                     }
                     // update['hovertemplate'].push(`<i>L</i>*: ${Math.round(lab['Lstar']*1000)/1000}<br><i>a</i>*: ${Math.round(lab['astar']*1000)/1000}<br><i>b</i>*: ${Math.round(lab['bstar']*1000)/1000}`+hoverBuffer);
                 } colorAssn.push(update);
-                Plotly.restyle(`res${j}`,colorAssn[j]);Plotly.relayout(`res${j}`,updateLayout);j++;
-            } for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);Plotly.relayout('scatter',updateLayout);
+                Plotly.restyle(`res${j}`,colorAssn[j]);Plotly.relayout(`res${j}`,window.prevLayout);j++;
+            } for (var k = 0; k < j; k++) Plotly.restyle('scatter',colorAssn[k],k);Plotly.relayout('scatter',window.prevLayout);
         }
 
         // function addField() {
