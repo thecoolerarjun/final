@@ -422,12 +422,14 @@
                 []
             ]
             for (uid in input) {
-                attrs[0].concat(input[uid]['test']['answers']['health']);
-                attrs[1].concat(input[uid]['test']['answers']['beauty']);
-                attrs[2].concat(input[uid]['test']['answers']['temperature']);
-                attrs[3].concat(input[uid]['test']['colors']['astar']);
-                attrs[4].concat(input[uid]['test']['colors']['bstar']);
-                attrs[5].concat(input[uid]['test']['colors']['Lstar']);
+                for (k in input[uid]['test']['answers']) {
+                    attrs[0].concat(input[uid]['test']['answers'][k]['health']);
+                    attrs[1].concat(input[uid]['test']['answers'][k]['beauty']);
+                    attrs[2].concat(input[uid]['test']['answers'][k]['temperature']);
+                    attrs[3].concat(input[uid]['test']['colors'][k]['astar']);
+                    attrs[4].concat(input[uid]['test']['colors'][k]['bstar']);
+                    attrs[5].concat(input[uid]['test']['colors'][k]['Lstar']);
+                }
             }
             var corrMatrix = [
                 [],
