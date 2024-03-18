@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="style.css" media="screen and (orientation:portrait)"/>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-2.29.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.1/lib/browser/math.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.1/lib/browser/math.min.js"></script> -->
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
     <title> COLOR ASSN </title>
 </head>
@@ -51,8 +51,9 @@
         <button type="button" id="clearAll">Clear All</button>
     </fieldset>
     <button type="button" id="relattr">Reload Attributes</button>
+    <button type="button" id="downloadData">Download DB Image</button>
 
-    <button type="button" id="makeMatrix">Make Matrix</button>
+    <!-- <button type="button" id="makeMatrix">Make Matrix</button> -->
 
     <!-- <div id="fields">
         <button type="button" id="addField">Add Field</button>
@@ -98,7 +99,8 @@
                 document.body.querySelector("#relattr").addEventListener('click', () => relattr(window.userData));
                 document.body.querySelector("#addField").addEventListener('click', () => addField());
                 document.body.querySelector("#clearAll").addEventListener('click', () => function() { for (field in document.getElementsByClassName('field')) field.value='' });
-                document.body.querySelector("#makeMatrix").addEventListener('click', () => makeMatrix(window.userData));
+                // document.body.querySelector("#makeMatrix").addEventListener('click', () => makeMatrix(window.userData));
+                document.body.querySelector("#downloadData").addEventListener('click', () => downloadData(window.userData));
             } else {
                 console.log("No data available");
             }
@@ -412,39 +414,50 @@
             delField.onclick = function() { div.remove() };
         }
 
-        function makeMatrix(input) {
-            var attrs = [
-                [],
-                [],
-                [],
-                [],
-                [],
-                []
-            ]
+        // function makeMatrix(input) {
+        //     var attrs = [
+        //         [],
+        //         [],
+        //         [],
+        //         [],
+        //         [],
+        //         []
+        //     ]
+        //     for (uid in input) {
+        //         for (k in input[uid]['test']['answers']) {
+        //             attrs[0].push(Number(input[uid]['test']['answers'][k]['health']));
+        //             attrs[1].push(Number(input[uid]['test']['answers'][k]['beauty']));
+        //             attrs[2].push(Number(input[uid]['test']['answers'][k]['temperature']));
+        //             attrs[3].push(Number(input[uid]['test']['colors'][k]['astar']));
+        //             attrs[4].push(Number(input[uid]['test']['colors'][k]['bstar']));
+        //             attrs[5].push(Number(input[uid]['test']['colors'][k]['Lstar']));
+        //         }
+        //     }
+        //     var corrMatrix = [
+        //         [],
+        //         [],
+        //         [],
+        //         [],
+        //         [],
+        //         []
+        //     ]
+        //     for (var i = 0; i < 6; i++) {
+        //         for (var j = 0; j < 6; j++) {
+        //             corrMatrix[i][j] = math.corr(attrs[i],attrs[j]);
+        //         }
+        //     }
+        //     return corrMatrix;
+        // }
+        
+        function downloadData(input) {
+            var content = 'data:text/csv;charset=utf-8,beauty,health,temperature,astar,bstar,Lstar\n';
             for (uid in input) {
-                for (k in input[uid]['test']['answers']) {
-                    attrs[0].push(Number(input[uid]['test']['answers'][k]['health']));
-                    attrs[1].push(Number(input[uid]['test']['answers'][k]['beauty']));
-                    attrs[2].push(Number(input[uid]['test']['answers'][k]['temperature']));
-                    attrs[3].push(Number(input[uid]['test']['colors'][k]['astar']));
-                    attrs[4].push(Number(input[uid]['test']['colors'][k]['bstar']));
-                    attrs[5].push(Number(input[uid]['test']['colors'][k]['Lstar']));
+                for (i in input[uid]['test']) {
+                    content += `${input[uid]['test']['answers'][i]['beauty']},${input[uid]['test']['answers'][i]['health']},${input[uid]['test']['answers'][i]['temperature']},${input[uid]['test']['colors'][i]['astar']},${input[uid]['test']['colors'][i]['bstar']},${input[uid]['test']['colors'][i]['Lstar']}\n`;
                 }
             }
-            var corrMatrix = [
-                [],
-                [],
-                [],
-                [],
-                [],
-                []
-            ]
-            for (var i = 0; i < 6; i++) {
-                for (var j = 0; j < 6; j++) {
-                    corrMatrix[i][j] = math.corr(attrs[i],attrs[j]);
-                }
-            }
-            return corrMatrix;
+            var uri = encodeURI(content);
+            Object.assign(document.createElement('a'),{href:uri,download:'image.csv'}).click();
         }
     </script>
 </body>
