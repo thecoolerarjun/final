@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="style.css" media="screen and (orientation:portrait)"/>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-2.29.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.1/lib/browser/math.min.js"></script>
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
     <title> COLOR ASSN </title>
 </head>
@@ -51,6 +52,8 @@
     </fieldset>
     <button type="button" id="relattr">Reload Attributes</button>
 
+    <button type="button" id="makeMatrix">Make Matrix</button>
+
     <!-- <div id="fields">
         <button type="button" id="addField">Add Field</button>
         <fieldset>
@@ -95,6 +98,7 @@
                 document.body.querySelector("#relattr").addEventListener('click', () => relattr(window.userData));
                 document.body.querySelector("#addField").addEventListener('click', () => addField());
                 document.body.querySelector("#clearAll").addEventListener('click', () => function() { for (field in document.getElementsByClassName('field')) field.value='' });
+                document.body.querySelector("#makeMatrix").addEventListener('click', () => makeMatrix(window.userData));
             } else {
                 console.log("No data available");
             }
@@ -406,6 +410,39 @@
             var field = div.appendChild(Object.assign(document.createElement('input'),{classList:'field'}));
             var delField = div.appendChild(Object.assign(document.createElement('button'),{type:'button',textContent:'Delete Field'}));
             delField.onclick = function() { div.remove() };
+        }
+
+        function makeMatrix(input) {
+            var attrs = [
+                [],
+                [],
+                [],
+                [],
+                [],
+                []
+            ]
+            for (uid in input) {
+                attrs[0].concat(input[uid]['test']['answers']['health']);
+                attrs[1].concat(input[uid]['test']['answers']['beauty']);
+                attrs[2].concat(input[uid]['test']['answers']['temperature']);
+                attrs[3].concat(input[uid]['test']['colors']['astar']);
+                attrs[4].concat(input[uid]['test']['colors']['bstar']);
+                attrs[5].concat(input[uid]['test']['colors']['Lstar']);
+            }
+            var corrMatrix = [
+                [],
+                [],
+                [],
+                [],
+                [],
+                []
+            ]
+            for (var i = 0; i < 6; i++) {
+                for (var j = 0; j < 6; j++) {
+                    corrMatrix[i][j] = math.corr(attrs[i],attrs[j]);
+                }
+            }
+            return corrMatrix;
         }
     </script>
 </body>
