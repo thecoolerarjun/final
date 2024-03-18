@@ -452,7 +452,7 @@
         function downloadData(input) {
             var content = 'data:text/csv;charset=utf-8,beauty,health,temperature,astar,bstar,Lstar\n';
             for (uid in input) {
-                for (i in input[uid]['test']) {
+                for (i in input[uid]['test']['answers']) {
                     content += `${input[uid]['test']['answers'][i]['beauty']},${input[uid]['test']['answers'][i]['health']},${input[uid]['test']['answers'][i]['temperature']},${input[uid]['test']['colors'][i]['astar']},${input[uid]['test']['colors'][i]['bstar']},${input[uid]['test']['colors'][i]['Lstar']}\n`;
                 }
             }
